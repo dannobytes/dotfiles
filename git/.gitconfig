@@ -1,0 +1,31 @@
+[user]
+  name = Daniels Lee
+  email = daniels@killingthemsoftly.me
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore
+[pull]
+  rebase = true
+[alias]
+  st = status
+  ci = commit
+  cia = commit --amend
+  co = checkout
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  dt = difftool
+  dstaged = diff --staged
+  diffs = diff --staged
+  logs = log --stat
+  logp = log -p
+  logl = log --oneline
+  mt = mergetool --no-prompt
+  sh = stash
+  shls = stash list
+  shshow = stash show
+[merge]
+  tool = vimdiff
+[difftool "opendiff"]
+  cmd = opendiff \"$REMOTE\" \"$LOCAL\"
+  tool = vimdiff
+  prompt = false
