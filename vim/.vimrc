@@ -8,15 +8,16 @@ Plug 'junegunn/fzf.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
-Plug 'tpope/vim-surround'      " Matching surround pairs
-Plug 'airblade/vim-gitgutter'  " Git integration
+Plug 'tpope/vim-surround'       " Matching surround pairs
+Plug 'airblade/vim-gitgutter'   " Git integration
 Plug 'tpope/vim-fugitive'
-Plug 'itchyny/lightline.vim'   " Status line
-Plug 'tomtom/tcomment_vim'     " Easy comments
-Plug 'crusoexia/vim-monokai'   " Colors
+Plug 'itchyny/lightline.vim'    " Status line
+Plug 'tomtom/tcomment_vim'      " Easy comments
+Plug 'crusoexia/vim-monokai'    " Colors
 Plug 'sjl/badwolf'
 Plug 'morhetz/gruvbox'
-Plug 'moll/vim-node'           " Open files via ESM
+Plug 'moll/vim-node'            " Open files via ESM
+Plug 'w0rp/ale'                 " Async linting
 call plug#end()
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
@@ -43,16 +44,17 @@ let g:lightline = {
       \ }
 
 colorscheme monokai
-syntax on
-filetype on
 filetype plugin indent on
+syntax on
+highlight Visual ctermbg=4
 
 if has("autocmd")
   " remove trailing white spaces
   autocmd BufWritePre * %s/\s\+$//e
 
-  " Add formatting, 'charvaluehex options
-  autocmd FileType * setlocal formatoptions+=j
+  " Extend my own custom format options.
+  autocmd BufRead *.scss setlocal formatoptions=croql
+  autocmd BufRead * setlocal formatoptions+=awj
 endif
 
 if executable('rg')
@@ -89,7 +91,7 @@ nmap <leader>so :source $MYVIMRC<cr>
 nmap <leader>vr :tabedit $MYVIMRC<cr>
 nmap <leader>bb :b#<cr>
 nmap <leader>bd :ls<cr>:bd<space>
-nmap <leader><C-p> :FZF<space>
+nmap <leader><C-p> :FZF<space>../
 nmap <leader>w <C-w>
 
 " Remappings
@@ -114,6 +116,7 @@ set cursorline                      " highlight cursor line
 set diffopt=vertical                " gdiff in vertical splits
 set encoding=utf-8
 set expandtab
+set hidden                          " Allow dirty buffers
 set history=500
 set ignorecase
 set incsearch
@@ -134,6 +137,7 @@ set smartcase
 set splitbelow                      " put new split window below current
 set splitright                      " put new split window to the right
 set tabstop=2
+set textwidth=80
 set title                           " set the title to the value of 'titlestring'
 set ttyfast                         " more characters sent to the screen to for smoother redraws
 set updatetime=100
