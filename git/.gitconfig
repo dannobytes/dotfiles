@@ -4,8 +4,11 @@
 [core]
   editor = vim
   excludesfile = ~/.gitignore
+[push]
+  followTags = true
 [pull]
   rebase = true
+  all = true
 [alias]
   st = status
   ci = commit
@@ -22,10 +25,14 @@
   mt = mergetool --no-prompt
   sh = stash
   shls = stash list
-  shshow = stash show
 [merge]
   tool = vimdiff
-[difftool "opendiff"]
-  cmd = opendiff \"$REMOTE\" \"$LOCAL\"
-  tool = vimdiff
+  conflictstyle = diff3
+[mergetool]
   prompt = false
+[mergetool "vimdiff"]
+  cmd = vimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
+[status]
+  showStash = false
+[commit]
+  gpgsign = true
