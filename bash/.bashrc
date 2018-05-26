@@ -1,3 +1,6 @@
+# Bash completion
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
 # Aliases
 alias ll="ls -lhA"
 
@@ -49,3 +52,6 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export FZF_DEFAULT_COMMAND='rg --ignore-file .gitignore --glob !.git --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
+
+# GPG key for git commit signing
+export GPG_TTY=$(tty)
