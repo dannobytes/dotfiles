@@ -1,6 +1,7 @@
 [user]
   name = Daniels Lee
-  email = daniels@killingthemsoftly.me
+  email = daniels@polleverywhere.com
+  signingkey = 70E4917CE1BE1885F7BC96E00F3C940176CF005E
 [core]
   editor = vim
   excludesfile = ~/.gitignore
@@ -10,29 +11,50 @@
   rebase = true
   all = true
 [alias]
-  st = status
-  ci = commit
-  cia = commit --amend
-  co = checkout
+  addp = add -p
   br = branch
-  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  dt = difftool
-  dstaged = diff --staged
+  ci = commit -v
+  cia = commit -v --amend
+  cianoe = commit --amend --no-edit
+  co = checkout
   diffs = diff --staged
-  logs = log --stat
-  logp = log -p
+  dt = difftool
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   logl = log --oneline
+  logp = log -p
+  logs = log --stat
   mt = mergetool --no-prompt
+  pushf= push --force-with-lease
+  re = rebase
+  re1 = rebase -i HEAD~1
+  re2 = rebase -i HEAD~2
+  re3 = rebase -i HEAD~3
+  re4 = rebase -i HEAD~4
+  re5 = rebase -i HEAD~5
+  re6 = rebase -i HEAD~6
+  re7 = rebase -i HEAD~7
+  re8 = rebase -i HEAD~8
+  re9 = rebase -i HEAD~9
+  re10 = rebase -i HEAD~10
+  reom = rebase origin/master
+  recont = rebase --continue
+  resetom = reset --hard origin/master
   sh = stash
   shls = stash list
+  st = status
 [merge]
-  tool = vimdiff
   conflictstyle = diff3
+  ff = false
+  tool = vimdiff
 [mergetool]
   prompt = false
 [mergetool "vimdiff"]
   cmd = vimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
 [status]
   showStash = false
+[stash]
+  showPatch = true
 [commit]
   gpgsign = true
+[rebase]
+  autoStash = true

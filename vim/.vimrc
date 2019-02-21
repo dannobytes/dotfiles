@@ -8,9 +8,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
-Plug 'tpope/vim-surround'       " Matching surround pairs
 Plug 'airblade/vim-gitgutter'   " Git integration
+Plug 'tpope/vim-surround'       " Matching surround pairs
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'itchyny/lightline.vim'    " Status line
 Plug 'tomtom/tcomment_vim'      " Easy comments
 Plug 'crusoexia/vim-monokai'    " Colors
@@ -18,9 +19,15 @@ Plug 'sjl/badwolf'
 Plug 'morhetz/gruvbox'
 Plug 'moll/vim-node'            " Open files via ESM
 Plug 'w0rp/ale'                 " Async linting
+Plug 'skwp/vim-html-escape'     " HTML entity escaping
+Plug 'digitaltoad/vim-pug'      " Pug syntax highlighting
 call plug#end()
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" Configure netrw directory view
+let g:netrw_liststyle = 0
+let g:netrw_keepdir = 1
 
 " Status line configuration
 let g:lightline = {
@@ -46,15 +53,24 @@ let g:lightline = {
 colorscheme monokai
 filetype plugin indent on
 syntax on
-highlight Visual ctermbg=4
+
+" Custom colors
+highlight Visual ctermbg=darkblue
+highlight ALEError ctermbg=darkred ctermfg=white
+highlight Search ctermbg=78
 
 if has("autocmd")
   " remove trailing white spaces
   autocmd BufWritePre * %s/\s\+$//e
 
+  " Apply file types to extensions not recognized.
+  autocmd BufEnter *.hamlc set filetype=haml
+  autocmd BufEnter *.pug set filetype=pug
+
   " Extend my own custom format options.
-  autocmd BufRead *.scss setlocal formatoptions=croql
-  autocmd BufRead * setlocal formatoptions+=awj
+  autocmd BufEnter *.scss setlocal formatoptions=roql
+  autocmd BufEnter * setlocal formatoptions+=wj
+  autocmd BufEnter * setlocal formatoptions-=c
 endif
 
 if executable('rg')
@@ -63,7 +79,7 @@ if executable('rg')
   function! MySearch()
     let grep_term = input("Enter search term: ")
     if !empty(grep_term)
-      execute 'silent grep!' grep_term | copen
+      execute 'silent grep!' grep_term | copen 15
     else
       echo "Empty search term"
     endif
@@ -71,8 +87,8 @@ if executable('rg')
   endfunction
   command! Search call MySearch()
   nnoremap \ :Search<CR>
-  nnoremap K "ayiw :Search<CR><C-r>a<CR>
-  vnoremap K "ay :Search<CR>'<C-r>a'<CR>
+  nnoremap \\ "ayiw :Search<CR><C-r>a<CR>
+  vnoremap \\ "ay :Search<CR>'<C-r>a'<CR>
 endif
 
 " Toggle between relative number and line number
@@ -91,33 +107,45 @@ nmap <leader>so :source $MYVIMRC<cr>
 nmap <leader>vr :tabedit $MYVIMRC<cr>
 nmap <leader>bb :b#<cr>
 nmap <leader>bd :ls<cr>:bd<space>
-nmap <leader><C-p> :FZF<space>../
+nmap <leader>p :FZF<space>../
 nmap <leader>w <C-w>
+nmap <leader>h :noh<cr>
+nmap <leader>ex :Ex ../
+
+" Search for whats visually selected
+vnoremap // y/\V<C-R>"<CR>
 
 " Remappings
-nnoremap <C-p> :FZF<cr>
-nnoremap <C-t> :Buffers<cr>
-nnoremap <C-n> :call ToggleNumber()<cr>
+nnoremap <c-p> :FZF<cr>
+nnoremap <c-t> :Buffers<cr>
+nnoremap <c-n> :call ToggleNumber()<cr>
+
+" Count number of matches for the word under the cursor
+nnoremap ,* *<c-o>:%s///gn<cr>
 
 " Navigate split windows easily
-nnoremap <C-l> <C-w><C-l>
-nnoremap <C-h> <C-w><C-h>
-nnoremap <C-k> <C-w><C-k>
-nnoremap <C-j> <C-w><C-j>
+nnoremap <c-l> <c-w><c-l>
+nnoremap <c-h> <c-w><c-h>
+nnoremap <c-k> <c-w><c-k>
+nnoremap <c-j> <c-w><c-j>
 
 set autoindent
 set autoread                        " display file changes immediately
+set autowrite
+set autowriteall
 set backspace=indent,eol,start      " allow backspacing over everything
 set clipboard=unnamed
 set colorcolumn=80
 set conceallevel=0
 set copyindent
-set cursorline                      " highlight cursor line
+set nocursorline                    " highlight cursor line
 set diffopt=vertical                " gdiff in vertical splits
 set encoding=utf-8
 set expandtab
+set formatoptions+=wj
 set hidden                          " Allow dirty buffers
 set history=500
+set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2                    " always show status line
@@ -126,7 +154,6 @@ set list
 set listchars=tab:»·,trail:·,nbsp:·
 set mouse=a                         " Enable mouse support
 set nocompatible
-set nohlsearch
 set noshowmode
 set noswapfile
 set number

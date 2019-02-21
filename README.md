@@ -1,2 +1,2 @@
 # local
-Local development
+Local development environment

@@ -16,6 +16,9 @@ alias j='jobs -l'
 alias which='type -a'
 alias ..='cd ..'
 
+# Git aliases
+alias gitsha="git rev-parse HEAD | tr -d '\n' | pbcopy && pbpaste && printf '\n'"
+
 # Modify the terminal prompt.
 # https://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
 export PS1="\e[1;35m[\A]$ \e[m"
@@ -25,14 +28,8 @@ export PS1="\e[1;35m[\A]$ \e[m"
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-# rbenv init
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 # Homebrew path
 PATH=/usr/local/bin:$PATH
-
-# Sublime
-export EDITOR='vim'
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
@@ -40,7 +37,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Keep ssh key in user chain.
-ssh-add -K ~/.ssh/id_rsa
+ssh-add -K ~/.ssh/id_rsa &>/dev/null
 
 # Bash git prompt setup.
 if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
@@ -53,5 +50,5 @@ fi
 
 export FZF_DEFAULT_COMMAND='rg --ignore-file .gitignore --glob !.git --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
 
-# GPG key for git commit signing
-export GPG_TTY=$(tty)
+# rbenv init
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
