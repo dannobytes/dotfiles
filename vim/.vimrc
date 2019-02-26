@@ -110,7 +110,12 @@ nmap <leader>bd :ls<cr>:bd<space>
 nmap <leader>p :FZF<space>../
 nmap <leader>w <C-w>
 nmap <leader>h :noh<cr>
-nmap <leader>ex :Ex ../
+nmap <leader>ex :Ex<cr>
+nmap <leader>..ex :Ex ../
+
+" Resizing buffer splits
+nmap <silent> + :exe "resize " . (winheight(0) * 9/8)<cr>
+nmap <silent> _ :exe "resize " . (winheight(0) * 7/8)<cr>
 
 " Search for whats visually selected
 vnoremap // y/\V<C-R>"<CR>

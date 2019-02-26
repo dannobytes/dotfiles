@@ -1,8 +1,11 @@
+export EDITOR=vim
+
 # Bash completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # Aliases
 alias ll="ls -lhA"
+alias ll@="ll node_modules/@polleverywhere/"
 
 alias rm='rm -i'
 alias cp='cp -i'
@@ -15,6 +18,15 @@ alias h='history'
 alias j='jobs -l'
 alias which='type -a'
 alias ..='cd ..'
+
+# PE aliases
+alias pe='pollev'
+alias peb='pollev build'
+alias ped='pollev deploy'
+alias pedh='pollev deploy-history'
+alias pe-staging-dbtunnel='pollev database tunnel -p 3309 rails-app staging'
+alias pe-prod-dbtunnel='pollev database tunnel -p 3308 rails-app production'
+alias pe-localdb='mysql -u root -D polleverywhere_development'
 
 # Git aliases
 alias gitsha="git rev-parse HEAD | tr -d '\n' | pbcopy && pbpaste && printf '\n'"
@@ -29,12 +41,10 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Homebrew path
-PATH=/usr/local/bin:$PATH
+PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# pollev commandline
+export PATH="$HOME/.pollev/bin:$PATH"
 
 # Keep ssh key in user chain.
 ssh-add -K ~/.ssh/id_rsa &>/dev/null
@@ -52,3 +62,8 @@ export FZF_DEFAULT_COMMAND='rg --ignore-file .gitignore --glob !.git --files-wit
 
 # rbenv init
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
