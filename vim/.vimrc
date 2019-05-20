@@ -4,32 +4,37 @@
 set rtp+=/usr/local/opt/fzf
 call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-gitgutter'     " Git integration
+Plug 'crusoexia/vim-monokai'      " Colors
+Plug 'digitaltoad/vim-pug'        " Pug syntax highlighting
 Plug 'editorconfig/editorconfig-vim'
-Plug 'pangloss/vim-javascript'
+Plug 'itchyny/lightline.vim'      " Status line
+Plug 'junegunn/fzf.vim'
 Plug 'kchmck/vim-coffee-script'
-Plug 'airblade/vim-gitgutter'   " Git integration
-Plug 'tpope/vim-surround'       " Matching surround pairs
+Plug 'leafgarland/typescript-vim' " Typescript syntax
+Plug 'moll/vim-node'              " Open files via ESM
+Plug 'morhetz/gruvbox'
+Plug 'pangloss/vim-javascript'
+Plug 'sjl/badwolf'
+Plug 'skwp/vim-html-escape'       " HTML entity escaping
+Plug 'tomtom/tcomment_vim'        " Easy comments
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'itchyny/lightline.vim'    " Status line
-Plug 'tomtom/tcomment_vim'      " Easy comments
-Plug 'crusoexia/vim-monokai'    " Colors
-Plug 'sjl/badwolf'
-Plug 'morhetz/gruvbox'
-Plug 'moll/vim-node'            " Open files via ESM
-Plug 'w0rp/ale'                 " Async linting
-Plug 'skwp/vim-html-escape'     " HTML entity escaping
-Plug 'digitaltoad/vim-pug'      " Pug syntax highlighting
+Plug 'tpope/vim-surround'         " Matching surround pairs
+Plug 'w0rp/ale'                   " Async linting
 call plug#end()
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+" --------------------
 " Configure netrw directory view
+" --------------------
 let g:netrw_liststyle = 0
 let g:netrw_keepdir = 1
 
+" --------------------
 " Status line configuration
+" --------------------
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
@@ -54,7 +59,9 @@ colorscheme monokai
 filetype plugin indent on
 syntax on
 
-" Custom colors
+" --------------------
+" Custom color configurations
+" --------------------
 highlight Visual ctermbg=darkblue
 highlight ALEError ctermbg=darkred ctermfg=white
 highlight Search ctermbg=78
@@ -64,31 +71,15 @@ if has("autocmd")
   autocmd BufWritePre * %s/\s\+$//e
 
   " Apply file types to extensions not recognized.
-  autocmd BufEnter *.hamlc set filetype=haml
-  autocmd BufEnter *.pug set filetype=pug
+  autocmd BufRead,BufNewFile *.hamlc set filetype=haml
+  autocmd BufRead,BufNewFile *.pug set filetype=pug
+  autocmd BufRead,BufNewFile *.json set filetype=json
+  autocmd BufRead,BufNewFile *.coffee set filetype=coffee
 
   " Extend my own custom format options.
   autocmd BufEnter *.scss setlocal formatoptions=roql
   autocmd BufEnter * setlocal formatoptions+=wj
   autocmd BufEnter * setlocal formatoptions-=c
-endif
-
-if executable('rg')
-  set grepprg=rg\ --smart-case\ --vimgrep\ --no-heading
-  set grepformat=%f:%l:%c:%m,%f:%l:%m
-  function! MySearch()
-    let grep_term = input("Enter search term: ")
-    if !empty(grep_term)
-      execute 'silent grep!' grep_term | copen 15
-    else
-      echo "Empty search term"
-    endif
-    redraw!
-  endfunction
-  command! Search call MySearch()
-  nnoremap \ :Search<CR>
-  nnoremap \\ "ayiw :Search<CR><C-r>a<CR>
-  vnoremap \\ "ay :Search<CR>'<C-r>a'<CR>
 endif
 
 " Toggle between relative number and line number
@@ -102,28 +93,63 @@ function! ToggleNumber()
   endif
 endfunc
 
-let mapleader = "\<Space>"          " Map the leader to spacebar rather than \
-nmap <leader>so :source $MYVIMRC<cr>
-nmap <leader>vr :tabedit $MYVIMRC<cr>
-nmap <leader>bb :b#<cr>
-nmap <leader>bd :ls<cr>:bd<space>
-nmap <leader>p :FZF<space>../
-nmap <leader>w <C-w>
-nmap <leader>h :noh<cr>
-nmap <leader>ex :Ex<cr>
-nmap <leader>..ex :Ex ../
+" Type `\` to initiate an rg search across all files in a quickfix window
+if executable('rg')
+  set grepprg=rg\ --smart-case\ --vimgrep\ --no-heading
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
+  function! MySearch()
+    let grep_term = input("Enter search term: ")
+    if !empty(grep_term)
+      execute 'silent grep!' grep_term | copen 10
+    else
+      echo "Empty search term"
+    endif
+    redraw!
+  endfunction
+  command! Search call MySearch()
+  nnoremap \ :Search<CR>
+  nnoremap \\ "ayiw :Search<CR><C-r>a<CR>
+  vnoremap \\ "ay :Search<CR>'<C-r>a'<CR>
+endif
+
+" Map the leader key to spacebar instead of `\`
+let mapleader = "\<Space>"
+
+" Shortucts to open vimrc and re-source it
+nnoremap <leader>vr :tabedit $MYVIMRC<cr>
+nnoremap <leader>so :source $MYVIMRC<cr>
+
+" Shortcuts to work with windows and buffers easier
+nnoremap <leader>w <C-w>
+nnoremap <leader>bb :b#<cr>
+nnoremap <leader>bd :ls<cr>:bd<space>
+
+" Turn off search highlighting
+nnoremap <leader>h :noh<cr>
+
+" Shortcuts to netrw explorer
+nnoremap <leader>./ :Ex<cr>
+nnoremap <leader>../ :Ex ../
+
+" Prettify into JSON format
+nnoremap <leader>jt :%!python -m json.tool<cr>
+vnoremap <leader>jt :'<,'>%!python -m json.tool<cr>
 
 " Resizing buffer splits
-nmap <silent> + :exe "resize " . (winheight(0) * 9/8)<cr>
-nmap <silent> _ :exe "resize " . (winheight(0) * 7/8)<cr>
+nnoremap <silent> + :exe "resize +3"<cr>
+nnoremap <silent> _ :exe "resize -3"<cr>
 
 " Search for whats visually selected
 vnoremap // y/\V<C-R>"<CR>
 
-" Remappings
+" Entrypoints to open up new files or buffers via filename/keywords
 nnoremap <c-p> :FZF<cr>
 nnoremap <c-t> :Buffers<cr>
+nnoremap <c-\> :Rg<cr>
 nnoremap <c-n> :call ToggleNumber()<cr>
+
+" Open up fuzzy search one directory above to fuzzy search in an adjacent path
+nnoremap <leader><C-p> :FZF<space>../
 
 " Count number of matches for the word under the cursor
 nnoremap ,* *<c-o>:%s///gn<cr>
@@ -134,6 +160,9 @@ nnoremap <c-h> <c-w><c-h>
 nnoremap <c-k> <c-w><c-k>
 nnoremap <c-j> <c-w><c-j>
 
+" --------------------
+" Settable options
+" --------------------
 set autoindent
 set autoread                        " display file changes immediately
 set autowrite
