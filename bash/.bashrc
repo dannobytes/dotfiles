@@ -1,5 +1,3 @@
-export EDITOR=vim
-
 # Bash completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
@@ -24,12 +22,16 @@ alias pe='pollev'
 alias peb='pollev build'
 alias ped='pollev deploy'
 alias pedh='pollev deploy-history'
+alias peul='pollev unlock'
 alias pe-staging-dbtunnel='pollev database tunnel -p 3309 rails-app staging'
 alias pe-prod-dbtunnel='pollev database tunnel -p 3308 rails-app production'
 alias pe-localdb='mysql -u root -D polleverywhere_development'
 
 # Git aliases
 alias gitsha="git rev-parse HEAD | tr -d '\n' | pbcopy && pbpaste && printf '\n'"
+
+# Set vim as default editor
+export EDITOR=vim
 
 # Modify the terminal prompt.
 # https://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
@@ -70,10 +72,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # Tmux, autostart. If not running interactively, do not do anything
 if [[ -z "$TMUX" ]] ;then
-    ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
-    if [[ -z "$ID" ]] ;then # if not available create a new one
-        tmux new-session
-    else
-        tmux attach-session -t "$ID" # if available attach to it
-    fi
+  tmux attach || tmux new
 fi
