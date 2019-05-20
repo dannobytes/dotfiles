@@ -1,20 +1,9 @@
-[user]
-  name = Daniels Lee
-  email = daniels@polleverywhere.com
-  signingkey = 70E4917CE1BE1885F7BC96E00F3C940176CF005E
-[core]
-  editor = vim
-  excludesfile = ~/.gitignore
-[push]
-  followTags = true
-[pull]
-  rebase = true
-  all = true
 [alias]
   addp = add -p
   br = branch
-  ci = commit -v
-  cia = commit -v --amend
+  ch = cherry-pick
+  ci = commit
+  cia = commit --amend
   cianoe = commit --amend --no-edit
   co = checkout
   diffs = diff --staged
@@ -23,7 +12,7 @@
   logl = log --oneline
   logp = log -p
   logs = log --stat
-  mt = mergetool --no-prompt
+  mt = mergetool
   pushf= push --force-with-lease
   re = rebase
   re1 = rebase -i HEAD~1
@@ -39,22 +28,44 @@
   reom = rebase origin/master
   recont = rebase --continue
   resetom = reset --hard origin/master
+  rs = reset
+  rs1 = reset HEAD~
+  rs2 = reset HEAD~2
+  rs3 = reset HEAD~3
+  rs4 = reset HEAD~4
+  rs5 = reset HEAD~5
   sh = stash
   shls = stash list
   st = status
+[commit]
+  gpgsign = true
+  verbose = true
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore
+[diff]
+  context = 5
 [merge]
   conflictstyle = diff3
   ff = false
   tool = vimdiff
 [mergetool]
+  keepBackup = false
   prompt = false
 [mergetool "vimdiff"]
   cmd = vimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
-[status]
-  showStash = false
-[stash]
-  showPatch = true
-[commit]
-  gpgsign = true
+[pull]
+  rebase = true
+  all = true
+[push]
+  followTags = true
 [rebase]
   autoStash = true
+[stash]
+  showPatch = true
+[status]
+  showStash = false
+[user]
+  name = Daniels Lee
+  email = daniels@polleverywhere.com
+  signingkey = 70E4917CE1BE1885F7BC96E00F3C940176CF005E
