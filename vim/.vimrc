@@ -201,6 +201,14 @@ set tabstop=2
 set textwidth=80
 set title                           " set the title to the value of 'titlestring'
 set ttyfast                         " more characters sent to the screen to for smoother redraws
+
+" Create undodir to hold persistent undo files if it doesn't exist.
+if !isdirectory($HOME."/.vim/undodir")
+  call mkdir($HOME."/.vim/undodir", "", 0700)
+endif
+set undodir=~/.vim/undodir          " Configure where undo files are stored
+set undofile                        " Persistent undo, even after closing vim
+
 set updatetime=100
 set visualbell                      " Set visual bell instad of a 'BEEP'
 set wrap linebreak                  " wrap line when lines are longer than the window width
