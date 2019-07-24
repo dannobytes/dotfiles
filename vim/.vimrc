@@ -14,7 +14,8 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'moll/vim-node'              " Open files via ESM
 Plug 'morhetz/gruvbox'
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'    " JS syntax highlighting
+Plug 'posva/vim-vue'              " Vue syntax highlighting
 Plug 'sjl/badwolf'
 Plug 'skwp/vim-html-escape'       " HTML entity escaping
 Plug 'tomtom/tcomment_vim'        " Easy comments
@@ -62,8 +63,8 @@ syntax on
 " --------------------
 " Custom color configurations
 " --------------------
+highlight clear ALEError
 highlight Visual ctermbg=darkblue
-highlight ALEError ctermbg=darkred ctermfg=white
 highlight Search ctermbg=78
 
 if has("autocmd")
@@ -172,7 +173,6 @@ set clipboard=unnamed
 set colorcolumn=80
 set conceallevel=0
 set copyindent
-set nocursorline                    " highlight cursor line
 set diffopt=vertical                " gdiff in vertical splits
 set encoding=utf-8
 set expandtab
@@ -188,9 +188,11 @@ set list
 set listchars=tab:»·,trail:·,nbsp:·
 set mouse=a                         " Enable mouse support
 set nocompatible
+set nocursorline                    " highlight cursor line
 set noshowmode
 set noswapfile
 set number
+set relativenumber                  " start with relative line numbers
 set shiftround
 set shiftwidth=2
 set showcmd                         " show the current command
