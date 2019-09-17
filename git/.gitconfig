@@ -27,13 +27,13 @@
   re10 = rebase -i HEAD~10
   reom = rebase origin/master
   recont = rebase --continue
-  resetom = reset --hard origin/master
   rs = reset
   rs1 = reset HEAD~
   rs2 = reset HEAD~2
   rs3 = reset HEAD~3
   rs4 = reset HEAD~4
   rs5 = reset HEAD~5
+  rsom = reset --hard origin/master
   sh = stash
   shls = stash list
   st = status
