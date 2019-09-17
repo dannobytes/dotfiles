@@ -15,7 +15,6 @@ alias mkdir='mkdir -p'
 alias h='history'
 alias j='jobs -l'
 alias which='type -a'
-alias ..='cd ..'
 
 # PE aliases
 alias pe='pollev'
@@ -60,6 +59,7 @@ fi
 # FZF stuff
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# Use FZF with ripgrep
 export FZF_DEFAULT_COMMAND='rg --ignore-file .gitignore --glob !.git --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
 
 # rbenv init
@@ -69,6 +69,9 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# nodenv
+[ -f "$(command -v nodenv)" ] && eval "$(nodenv init -)"
 
 # Tmux, autostart. If not running interactively, do not do anything
 if [[ -z "$TMUX" ]] ;then
