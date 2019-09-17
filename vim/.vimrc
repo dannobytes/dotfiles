@@ -66,6 +66,7 @@ syntax on
 highlight clear ALEError
 highlight Visual ctermbg=darkblue
 highlight Search ctermbg=78
+highlight GitGutterDelete guifg=#ff5f87 ctermfg=204
 
 if has("autocmd")
   " remove trailing white spaces
@@ -137,8 +138,8 @@ nnoremap <leader>jt :%!python -m json.tool<cr>
 vnoremap <leader>jt :'<,'>%!python -m json.tool<cr>
 
 " Resizing buffer splits
-nnoremap <silent> + :exe "resize +3"<cr>
-nnoremap <silent> _ :exe "resize -3"<cr>
+nnoremap <silent> + :exe "resize +5"<cr>
+nnoremap <silent> _ :exe "resize -5"<cr>
 
 " Search for whats visually selected
 vnoremap // y/\V<C-R>"<CR>
