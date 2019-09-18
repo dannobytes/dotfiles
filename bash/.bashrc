@@ -34,7 +34,9 @@ export EDITOR=vim
 
 # Modify the terminal prompt.
 # https://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
-export PS1="\e[1;35m[\A]$ \e[m"
+START_COLOR='\e[1;35m'
+END_COLOR='\e[m'
+export PS1="$START_COLOR[\A]$ $END_COLOR"
 
 # Add color to the OSX terminal.
 # http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/
@@ -59,7 +61,7 @@ fi
 # FZF stuff
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Use FZF with ripgrep
+# Configure FZF to use ripgrep
 export FZF_DEFAULT_COMMAND='rg --ignore-file .gitignore --glob !.git --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
 
 # rbenv init
@@ -68,7 +70,6 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # nodenv
 [ -f "$(command -v nodenv)" ] && eval "$(nodenv init -)"
