@@ -52,6 +52,9 @@ export PATH="$HOME/.pollev/bin:$PATH"
 # Keep ssh key in user chain.
 ssh-add -K ~/.ssh/id_rsa &>/dev/null
 
+# Setup GPG
+export GPG_TTY=$(tty)
+
 # Bash git prompt setup.
 if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
   __GIT_PROMPT_DIR="/usr/local/opt/bash-git-prompt/share"
@@ -65,7 +68,7 @@ fi
 export FZF_DEFAULT_COMMAND='rg --ignore-file .gitignore --glob !.git --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
 
 # rbenv init
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+[ -f "$(command -v rbenv)" ] && eval "$(rbenv init -)"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
