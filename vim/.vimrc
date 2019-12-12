@@ -69,19 +69,30 @@ highlight Search ctermbg=78
 highlight GitGutterDelete guifg=#ff5f87 ctermfg=204
 
 if has("autocmd")
-  " remove trailing white spaces
-  autocmd BufWritePre * %s/\s\+$//e
+  augroup editing
+    " remove trailing white spaces
+    autocmd BufWritePre * %s/\s\+$//e
+  augroup END
 
   " Apply file types to extensions not recognized.
-  autocmd BufRead,BufNewFile *.hamlc set filetype=haml
-  autocmd BufRead,BufNewFile *.pug set filetype=pug
-  autocmd BufRead,BufNewFile *.json set filetype=json
-  autocmd BufRead,BufNewFile *.coffee set filetype=coffee
+  augroup fileTypes
+    autocmd BufRead,BufNewFile *.hamlc set filetype=haml
+    autocmd BufRead,BufNewFile *.pug set filetype=pug
+    autocmd BufRead,BufNewFile *.json set filetype=json
+    autocmd BufRead,BufNewFile *.coffee set filetype=coffee
+  augroup END
 
   " Extend my own custom format options.
-  autocmd BufEnter *.scss setlocal formatoptions=roql
-  autocmd BufEnter * setlocal formatoptions+=wj
-  autocmd BufEnter * setlocal formatoptions-=c
+  augroup formatOptions
+    autocmd BufEnter *.scss setlocal formatoptions=roql
+    autocmd BufEnter * setlocal formatoptions+=wj
+    autocmd BufEnter * setlocal formatoptions-=c
+  augroup END
+
+  " Make `gf` work within files that have trouble with it.
+  augroup gotoFile
+    autocmd BufEnter *.scss setlocal includeexpr=substitute(v:fname,'^\\~','node_modules/','')
+  augroup END
 endif
 
 " Toggle between relative number and line number
