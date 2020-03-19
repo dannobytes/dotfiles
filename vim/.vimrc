@@ -13,19 +13,28 @@ Plug 'junegunn/fzf.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'moll/vim-node'              " Open files via ESM
-Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'    " JS syntax highlighting
 Plug 'posva/vim-vue'              " Vue syntax highlighting
 Plug 'sjl/badwolf'
 Plug 'skwp/vim-html-escape'       " HTML entity escaping
 Plug 'tomtom/tcomment_vim'        " Easy comments
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'         " Matching surround pairs
 Plug 'w0rp/ale'                   " Async linting
 call plug#end()
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" --------------------
+" Configure ale async linting
+" --------------------
+let g:ale_fix_on_save = 1
+" let g:ale_fixers = {
+"       \  '*': ['remove_trailing_lines', 'trim_whitespace'],
+"       \  'javascript': ['eslint'],
+"       \}
 
 " --------------------
 " Configure netrw directory view
@@ -194,8 +203,9 @@ set history=500
 set hlsearch
 set ignorecase
 set incsearch
-set laststatus=2                    " always show status line
-set lazyredraw                      " disable redraw during actions
+set isfname+=@-@                    " Always include `@` char in file names
+set laststatus=2                    " Always show status line
+set lazyredraw                      " Disable redraw during actions
 set list
 set listchars=tab:»·,trail:·,nbsp:·
 set mouse=a                         " Enable mouse support

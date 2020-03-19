@@ -13,9 +13,11 @@
   logp = log -p
   logs = log --stat
   mt = mergetool
+  pu = pull
   pushf= push --force-with-lease
   re = rebase
   re1 = rebase -i HEAD~1
+  re10 = rebase -i HEAD~10
   re2 = rebase -i HEAD~2
   re3 = rebase -i HEAD~3
   re4 = rebase -i HEAD~4
@@ -24,9 +26,8 @@
   re7 = rebase -i HEAD~7
   re8 = rebase -i HEAD~8
   re9 = rebase -i HEAD~9
-  re10 = rebase -i HEAD~10
-  reom = rebase origin/master
   recont = rebase --continue
+  reom = rebase origin/master
   rs = reset
   rs1 = reset HEAD~
   rs2 = reset HEAD~2
@@ -67,5 +68,5 @@
   showStash = false
 [user]
   name = Daniels Lee
-  email = dannlee@gmail.com
-  signingkey = 3BB7D45CDED91183
+  email = daniels@polleverywhere.com
+  signingkey = 70E4917CE1BE1885F7BC96E00F3C940176CF005E

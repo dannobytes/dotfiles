@@ -29,6 +29,9 @@ alias pe-localdb='mysql -u root -D polleverywhere_development'
 # Git aliases
 alias gitsha="git rev-parse HEAD | tr -d '\n' | pbcopy && pbpaste && printf '\n'"
 
+# Silence the warning message to switch shells to zsh
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # Set vim as default editor
 export EDITOR=vim
 
