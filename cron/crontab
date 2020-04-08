@@ -1,0 +1,14 @@
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7)  OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  *  command to be executed
+# *  *  *  *  *  command --arg1 --arg2 file1 file2 2>&1
+
+# Remove stale undo files unmodified more than 90 days ago weekly
+05 10 * * 2 find ~/.vim/undodir -type f -mtime +90 -delete
+
+# Prune docker assets weekly
+05 10 * * 2 docker system prune -af
