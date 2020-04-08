@@ -31,10 +31,11 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " Configure ale async linting
 " --------------------
 let g:ale_fix_on_save = 1
-" let g:ale_fixers = {
-"       \  '*': ['remove_trailing_lines', 'trim_whitespace'],
-"       \  'javascript': ['eslint'],
-"       \}
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['remove_trailing_lines', 'trim_whitespace', 'eslint'],
+\   'scss': ['remove_trailing_lines', 'trim_whitespace', 'stylelint'],
+\}
 
 " --------------------
 " Configure netrw directory view
