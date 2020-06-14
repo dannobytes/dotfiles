@@ -1,14 +1,14 @@
 " --------------------
 " Plugins
 " --------------------
-set rtp+=/usr/local/opt/fzf
 call plug#begin('~/.vim/plugged')
-Plug '/usr/local/opt/fzf'
 Plug 'airblade/vim-gitgutter'     " Git integration
 Plug 'crusoexia/vim-monokai'      " Colors
+Plug 'dense-analysis/ale'         " Async linting
 Plug 'digitaltoad/vim-pug'        " Pug syntax highlighting
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'      " Status line
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim' " Typescript syntax
@@ -22,10 +22,14 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'         " Matching surround pairs
-Plug 'w0rp/ale'                   " Async linting
 call plug#end()
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" --------------------
+" Configure git gutter settings
+" --------------------
+let g:gitgutter_diff_relative_to = 'index'
 
 " --------------------
 " Configure ale async linting

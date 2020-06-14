@@ -26,6 +26,7 @@
   re7 = rebase -i HEAD~7
   re8 = rebase -i HEAD~8
   re9 = rebase -i HEAD~9
+  rebort = rebase --abort
   recont = rebase --continue
   reom = rebase origin/master
   rs = reset
