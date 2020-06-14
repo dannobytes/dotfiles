@@ -7,8 +7,11 @@
 # *  *  *  *  *  command to be executed
 # *  *  *  *  *  command --arg1 --arg2 file1 file2 2>&1
 
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
 # Remove stale undo files unmodified more than 90 days ago weekly
 05 10 * * 2 find ~/.vim/undodir -type f -mtime +90 -delete
 
 # Prune docker assets weekly
-05 10 * * 2 docker system prune -af
+10 10 * * 2 docker system prune -af
