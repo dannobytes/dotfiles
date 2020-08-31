@@ -147,7 +147,6 @@ nnoremap <leader>vr :tabedit $MYVIMRC<cr>
 nnoremap <leader>so :source $MYVIMRC<cr>
 
 " Shortcuts to work with windows and buffers easier
-nnoremap <leader>w <C-w>
 nnoremap <leader>bb :b#<cr>
 nnoremap <leader>bd :ls<cr>:bd<space>
 
