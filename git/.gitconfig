@@ -8,12 +8,13 @@
   co = checkout
   diffs = diff --staged
   dt = difftool
+  fixup = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   logl = log --oneline
   logp = log -p
   logs = log --stat
   mt = mergetool
-  pu = pull
+  pu = pull --prune
   pushf= push --force-with-lease
   re = rebase
   re1 = rebase -i HEAD~1
@@ -35,6 +36,10 @@
   rs3 = reset HEAD~3
   rs4 = reset HEAD~4
   rs5 = reset HEAD~5
+  rs6 = reset HEAD~6
+  rs7 = reset HEAD~7
+  rs8 = reset HEAD~8
+  rs9 = reset HEAD~9
   rsom = reset --hard origin/master
   sh = stash
   shls = stash list
@@ -62,12 +67,14 @@
 [push]
   followTags = true
 [rebase]
-  autoStash = true
+  autostash = true
+  autosquash = true
 [stash]
   showPatch = true
+  showStat = true
 [status]
   showStash = false
 [user]
   name = Daniels Lee
-  email = daniels@polleverywhere.com
-  signingkey = 70E4917CE1BE1885F7BC96E00F3C940176CF005E
+  email = dannlee@gmail.com
+  signingkey = 7B1CA190DBFB388CE139E75132DC11FF833AB6B1
