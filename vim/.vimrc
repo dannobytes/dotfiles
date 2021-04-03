@@ -3,6 +3,7 @@
 " --------------------
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'     " Git integration
+Plug 'ap/vim-css-color'           " CSS color previews
 Plug 'crusoexia/vim-monokai'      " Colors
 Plug 'dense-analysis/ale'         " Async linting
 Plug 'digitaltoad/vim-pug'        " Pug syntax highlighting
@@ -10,11 +11,13 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'      " Status line
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'jxnblk/vim-mdx-js'          " MDX syntax highlighting
 Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'moll/vim-node'              " Open files via ESM
 Plug 'pangloss/vim-javascript'    " JS syntax highlighting
 Plug 'posva/vim-vue'              " Vue syntax highlighting
+" Plug 'sheerun/vim-polyglot'       " Syntax highlighting for many languages
 Plug 'sjl/badwolf'
 Plug 'skwp/vim-html-escape'       " HTML entity escaping
 Plug 'tomtom/tcomment_vim'        " Easy comments
@@ -25,6 +28,11 @@ Plug 'tpope/vim-surround'         " Matching surround pairs
 call plug#end()
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" --------------------
+" Configure fzf.vim
+" --------------------
+let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-/']
 
 " --------------------
 " Configure git gutter settings
@@ -77,7 +85,7 @@ syntax on
 " --------------------
 " Custom color configurations
 " --------------------
-highlight clear ALEError
+" highlight clear ALEError
 highlight Visual ctermbg=darkblue
 highlight Search ctermbg=78
 highlight GitGutterDelete guifg=#ff5f87 ctermfg=204
@@ -142,6 +150,10 @@ endif
 " Map the leader key to spacebar instead of `\`
 let mapleader = "\<Space>"
 
+" Shortcuts to skip to next/previous ALE errors
+nnoremap [e :ALEPrevious<cr>
+nnoremap ]e :ALENext<cr>
+
 " Shortucts to open vimrc and re-source it
 nnoremap <leader>vr :tabedit $MYVIMRC<cr>
 nnoremap <leader>so :source $MYVIMRC<cr>
@@ -169,13 +181,15 @@ nnoremap <silent> _ :exe "resize -5"<cr>
 vnoremap // y/\V<C-R>"<CR>
 
 " Entrypoints to open up new files or buffers via filename/keywords
-nnoremap <c-p> :FZF<cr>
+nnoremap <c-p> :Files<cr>
 nnoremap <c-t> :Buffers<cr>
 nnoremap <c-\> :Rg<cr>
-nnoremap <c-n> :call ToggleNumber()<cr>
 
 " Open up fuzzy search one directory above to fuzzy search in an adjacent path
 nnoremap <leader><C-p> :FZF<space>../
+
+" Toggle relative line numbers
+nnoremap <c-n> :call ToggleNumber()<cr>
 
 " Count number of matches for the word under the cursor
 nnoremap ,* *<c-o>:%s///gn<cr>
