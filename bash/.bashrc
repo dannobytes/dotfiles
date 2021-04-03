@@ -3,28 +3,16 @@
 
 # Aliases
 alias ll="ls -lhA"
-alias ll@="ll node_modules/@polleverywhere/"
-
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-# -> Prevents accidentally clobbering files.
+# Prevents accidentally clobbering files.
 alias mkdir='mkdir -p'
 
 alias h='history'
 alias j='jobs -l'
 alias which='type -a'
-
-# PE aliases
-alias pe='pollev'
-alias peb='pollev build'
-alias ped='pollev deploy'
-alias pedh='pollev deploy-history'
-alias peul='pollev unlock'
-alias pe-staging-dbtunnel='pollev database tunnel -p 3309 rails-app staging'
-alias pe-prod-dbtunnel='pollev database tunnel -p 3308 rails-app production'
-alias pe-localdb='mysql -u root -D polleverywhere_development'
 
 # Git aliases
 alias gitsha="git rev-parse HEAD | tr -d '\n' | pbcopy && pbpaste && printf '\n'"
@@ -49,9 +37,6 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 # Homebrew path
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
-# pollev commandline
-export PATH="$HOME/.pollev/bin:$PATH"
-
 # Keep ssh key in user chain.
 ssh-add -K ~/.ssh/id_rsa &>/dev/null
 
@@ -69,16 +54,6 @@ fi
 
 # Configure FZF to use ripgrep
 export FZF_DEFAULT_COMMAND='rg --ignore-file .gitignore --glob !.git --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
-
-# rbenv init
-[ -f "$(command -v rbenv)" ] && eval "$(rbenv init -)"
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# nodenv
-[ -f "$(command -v nodenv)" ] && eval "$(nodenv init -)"
 
 # Tmux, autostart. If not running interactively, do not do anything
 if [[ -z "$TMUX" ]] ;then
