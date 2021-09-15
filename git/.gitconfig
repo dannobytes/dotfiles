@@ -30,6 +30,7 @@
   rebort = rebase --abort
   recont = rebase --continue
   reom = rebase origin/master
+  reomain = rebase origin/main
   rs = reset
   rs1 = reset HEAD~
   rs2 = reset HEAD~2
@@ -41,6 +42,7 @@
   rs8 = reset HEAD~8
   rs9 = reset HEAD~9
   rsom = reset --hard origin/master
+  rsomain = reset --hard origin/main
   sh = stash
   shls = stash list
   st = status
@@ -52,6 +54,8 @@
   excludesfile = ~/.gitignore
 [diff]
   context = 5
+[init]
+  defaultBranch = main
 [merge]
   conflictstyle = diff3
   ff = false
@@ -67,8 +71,8 @@
 [push]
   followTags = true
 [rebase]
-  autostash = true
-  autosquash = true
+  autoStash = true
+  autoSquash = true
 [stash]
   showPatch = true
   showStat = true
