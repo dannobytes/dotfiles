@@ -47,6 +47,8 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " Configure fzf.vim
 " --------------------
 let g:fzf_preview_window = ['right:60%', 'ctrl-/']
+command! -bang -nargs=? -complete=dir Files
+\ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': []}), <bang>0)
 
 " --------------------
 " Configure git gutter settings

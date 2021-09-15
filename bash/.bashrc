@@ -20,9 +20,12 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # Set vim as default editor
 export EDITOR=vim
 
-# Set bat config path to my dotfiles config
+# Set "bat" config path to my dotfiles config
 # https://github.com/sharkdp/bat
 export BAT_CONFIG_PATH="$HOME/projects/dotfiles/bat/bat.conf"
+
+# Use "bat" as the colorizing pager for "man"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Modify the terminal prompt.
 # https://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
@@ -54,7 +57,7 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Configure FZF to use ripgrep
-export FZF_DEFAULT_COMMAND='rg --ignore-file .gitignore --glob !.git --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
+export FZF_DEFAULT_COMMAND='rg --ignore-file .gitignore --glob "!{.git,node_modules}/*" --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
 
 # Tmux, autostart. If not running interactively, do not do anything
 if [[ -z "$TMUX" ]] ;then
