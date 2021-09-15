@@ -2,37 +2,51 @@
 " Plugins
 " --------------------
 call plug#begin('~/.vim/plugged')
-Plug 'airblade/vim-gitgutter'     " Git integration
+Plug 'airblade/vim-gitgutter'     " Git gutter integration
 Plug 'ap/vim-css-color'           " CSS color previews
 Plug 'crusoexia/vim-monokai'      " Colors
 Plug 'dense-analysis/ale'         " Async linting
-Plug 'digitaltoad/vim-pug'        " Pug syntax highlighting
 Plug 'editorconfig/editorconfig-vim'
-Plug 'itchyny/lightline.vim'      " Status line
+Plug 'vim-airline/vim-airline'        " Status line
+Plug 'vim-airline/vim-airline-themes' " Status line themes
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'jxnblk/vim-mdx-js'          " MDX syntax highlighting
-Plug 'kchmck/vim-coffee-script'
-Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'moll/vim-node'              " Open files via ESM
-Plug 'pangloss/vim-javascript'    " JS syntax highlighting
-Plug 'posva/vim-vue'              " Vue syntax highlighting
-" Plug 'sheerun/vim-polyglot'       " Syntax highlighting for many languages
+Plug 'neoclide/coc.nvim', {'branch': 'release'}   " LSP client
+Plug 'sheerun/vim-polyglot'       " Syntax highlighting for many languages
 Plug 'sjl/badwolf'
 Plug 'skwp/vim-html-escape'       " HTML entity escaping
 Plug 'tomtom/tcomment_vim'        " Easy comments
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'         " Git integration
 Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-rhubarb'          " Enables :GBrowse
 Plug 'tpope/vim-surround'         " Matching surround pairs
 call plug#end()
 
+colorscheme monokai
+filetype plugin indent on
+syntax on
+
+" --------------------
+" Configure airline status/tabline
+" --------------------
+let g:airline_theme = 'bubblegum'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#tab_min_count = 2
+
+" --------------------
+" Configure editorconfig plugin to work well with fugitive.
+" --------------------
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " --------------------
 " Configure fzf.vim
 " --------------------
-let g:fzf_preview_window = ['right:60%:hidden', 'ctrl-/']
+let g:fzf_preview_window = ['right:60%', 'ctrl-/']
 
 " --------------------
 " Configure git gutter settings
@@ -47,6 +61,9 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['remove_trailing_lines', 'trim_whitespace', 'eslint'],
 \   'scss': ['remove_trailing_lines', 'trim_whitespace', 'stylelint'],
+\}
+let g:ale_linters_ignore = {
+\   'json': ['eslint']
 \}
 
 " --------------------
@@ -78,14 +95,9 @@ let g:lightline = {
       \ },
       \ }
 
-colorscheme monokai
-filetype plugin indent on
-syntax on
-
 " --------------------
 " Custom color configurations
 " --------------------
-" highlight clear ALEError
 highlight Visual ctermbg=darkblue
 highlight Search ctermbg=78
 highlight GitGutterDelete guifg=#ff5f87 ctermfg=204
@@ -93,27 +105,33 @@ highlight GitGutterDelete guifg=#ff5f87 ctermfg=204
 if has("autocmd")
   augroup editing
     " remove trailing white spaces
+    autocmd!
     autocmd BufWritePre * %s/\s\+$//e
   augroup END
 
   " Apply file types to extensions not recognized.
   augroup fileTypes
+    autocmd!
     autocmd BufRead,BufNewFile *.hamlc set filetype=haml
     autocmd BufRead,BufNewFile *.pug set filetype=pug
     autocmd BufRead,BufNewFile *.json set filetype=json
     autocmd BufRead,BufNewFile *.coffee set filetype=coffee
   augroup END
 
-  " Extend my own custom format options.
+  " Extend my own custom format options to specific file types.
   augroup formatOptions
+    autocmd!
     autocmd BufEnter *.scss setlocal formatoptions=roql
+    autocmd BufEnter *.md setlocal formatoptions-=t
     autocmd BufEnter * setlocal formatoptions+=wj
     autocmd BufEnter * setlocal formatoptions-=c
+    autocmd FileType gitcommit setlocal formatoptions-=t
   augroup END
 
   " Make `gf` work within files that have trouble with it.
   augroup gotoFile
-    autocmd BufEnter *.scss setlocal includeexpr=substitute(v:fname,'^\\~','node_modules/','')
+    autocmd!
+    autocmd BufEnter *.scss setlocal includeexpr=substitute(v:fname,'^\\~*','node_modules/','')
   augroup END
 endif
 
@@ -155,8 +173,8 @@ nnoremap [e :ALEPrevious<cr>
 nnoremap ]e :ALENext<cr>
 
 " Shortucts to open vimrc and re-source it
-nnoremap <leader>vr :tabedit $MYVIMRC<cr>
-nnoremap <leader>so :source $MYVIMRC<cr>
+nnoremap <leader>vrc :tabedit $MYVIMRC<cr>
+nnoremap <leader>vrso :source $MYVIMRC<cr>
 
 " Shortcuts to work with windows and buffers easier
 nnoremap <leader>bb :b#<cr>
@@ -253,4 +271,4 @@ set undofile                        " Persistent undo, even after closing vim
 
 set updatetime=100
 set visualbell                      " Set visual bell instad of a 'BEEP'
-set wrap linebreak                  " wrap line when lines are longer than the window width
+set wrap                            " wrap line when lines are longer than the window width
