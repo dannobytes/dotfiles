@@ -2,16 +2,13 @@
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # Aliases
-alias ll="ls -lhA"
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-
-# Prevents accidentally clobbering files.
-alias mkdir='mkdir -p'
-
-alias h='history'
-alias j='jobs -l'
+alias ll="ls -lhA"      # More useful list all
+alias rm='rm -i'        # Warn before deleting
+alias cp='cp -i'        # Warn before copying
+alias mv='mv -i'        # Warn before moving
+alias mkdir='mkdir -p'  # Prevents accidentally clobbering files.
+alias h='history'       # See history
+alias j='jobs -l'       # See running jobs
 alias which='type -a'
 
 # Git aliases
@@ -22,6 +19,10 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Set vim as default editor
 export EDITOR=vim
+
+# Set bat config path to my dotfiles config
+# https://github.com/sharkdp/bat
+export BAT_CONFIG_PATH="$HOME/projects/dotfiles/bat/bat.conf"
 
 # Modify the terminal prompt.
 # https://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
