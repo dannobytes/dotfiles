@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'     " Git gutter integration
 Plug 'ap/vim-css-color'           " CSS color previews
 Plug 'crusoexia/vim-monokai'      " Colors
-Plug 'dense-analysis/ale'         " Async linting
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-airline/vim-airline'        " Status line
 Plug 'vim-airline/vim-airline-themes' " Status line themes
@@ -23,9 +22,25 @@ Plug 'tpope/vim-rhubarb'          " Enables :GBrowse
 Plug 'tpope/vim-surround'         " Matching surround pairs
 call plug#end()
 
-colorscheme monokai
-filetype plugin indent on
-syntax on
+" --------------------
+" CoC config
+" https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+" --------------------
+let g:coc_global_extensions = [
+\ 'coc-css',
+\ 'coc-eslint',
+\ 'coc-html',
+\ 'coc-jest',
+\ 'coc-json',
+\ 'coc-marketplace',
+\ 'coc-svg',
+\ 'coc-tsserver',
+\ 'coc-yaml',
+\ 'coc-yank',
+\]
+
+" Prevent missing cursor after :CocList
+let g:coc_disable_transparent_cursor = 1
 
 " --------------------
 " Configure airline status/tabline
@@ -46,27 +61,13 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " --------------------
 " Configure fzf.vim
 " --------------------
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.9 } }
 let g:fzf_preview_window = ['right:60%', 'ctrl-/']
-command! -bang -nargs=? -complete=dir Files
-\ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': []}), <bang>0)
 
 " --------------------
 " Configure git gutter settings
 " --------------------
 let g:gitgutter_diff_relative_to = 'index'
-
-" --------------------
-" Configure ale async linting
-" --------------------
-let g:ale_fix_on_save = 1
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['remove_trailing_lines', 'trim_whitespace', 'eslint'],
-\   'scss': ['remove_trailing_lines', 'trim_whitespace', 'stylelint'],
-\}
-let g:ale_linters_ignore = {
-\   'json': ['eslint']
-\}
 
 " --------------------
 " Configure netrw directory view
@@ -75,36 +76,21 @@ let g:netrw_liststyle = 0
 let g:netrw_keepdir = 1
 
 " --------------------
-" Status line configuration
+" AUTO COMMANDS
 " --------------------
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filepath', 'modified' ] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'inactive': {
-      \   'left': [ [ 'filepath' ] ]
-      \ },
-      \ 'component': {
-      \   'filepath': '%f'
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
-
-" --------------------
-" Custom color configurations
-" --------------------
-highlight Visual ctermbg=darkblue
-highlight Search ctermbg=78
-highlight GitGutterDelete guifg=#ff5f87 ctermfg=204
-
 if has("autocmd")
+  " Apply custom color overrides whenever color scheme changes
+  function! CustomHighlights()
+    highlight CocErrorFloat ctermfg=green guifg=green
+    highlight Visual ctermbg=darkblue
+    highlight Search ctermbg=78
+    highlight GitGutterDelete guifg=#ff5f87 ctermfg=204
+  endfunc
+  augroup customHighlights
+    autocmd!
+    autocmd ColorScheme * call CustomHighlights()
+  augroup END
+
   augroup editing
     " remove trailing white spaces
     autocmd!
@@ -116,7 +102,6 @@ if has("autocmd")
     autocmd!
     autocmd BufRead,BufNewFile *.hamlc set filetype=haml
     autocmd BufRead,BufNewFile *.pug set filetype=pug
-    autocmd BufRead,BufNewFile *.json set filetype=json
     autocmd BufRead,BufNewFile *.coffee set filetype=coffee
   augroup END
 
@@ -137,20 +122,9 @@ if has("autocmd")
   augroup END
 endif
 
-" Toggle between relative number and line number
-function! ToggleNumber()
-  if(!&relativenumber && !&number)
-    set number
-  elseif(!&relativenumber)
-    set relativenumber
-  else
-    set norelativenumber
-  endif
-endfunc
-
 " Type `\` to initiate an rg search across all files in a quickfix window
 if executable('rg')
-  set grepprg=rg\ --smart-case\ --vimgrep\ --no-heading
+  set grepprg=rg\ --smart-case\ --vimgrep\ --no-heading\ --follow
   set grepformat=%f:%l:%c:%m,%f:%l:%m
   function! MySearch()
     let grep_term = input("Enter search term: ")
@@ -167,15 +141,13 @@ if executable('rg')
   vnoremap \\ "ay :Search<CR>'<C-r>a'<CR>
 endif
 
-" Map the leader key to spacebar instead of `\`
+" --------------------
+" MAPPINGS
+" --------------------
 let mapleader = "\<Space>"
 
-" Shortcuts to skip to next/previous ALE errors
-nnoremap [e :ALEPrevious<cr>
-nnoremap ]e :ALENext<cr>
-
 " Shortucts to open vimrc and re-source it
-nnoremap <leader>vrc :tabedit $MYVIMRC<cr>
+nnoremap <leader>vrc :edit $MYVIMRC<cr>
 nnoremap <leader>vrso :source $MYVIMRC<cr>
 
 " Shortcuts to work with windows and buffers easier
@@ -201,6 +173,8 @@ nnoremap <silent> _ :exe "resize -5"<cr>
 vnoremap // y/\V<C-R>"<CR>
 
 " Entrypoints to open up new files or buffers via filename/keywords
+nnoremap <leader>C :Commits<cr>
+nnoremap <leader>H :History<cr>
 nnoremap <c-p> :Files<cr>
 nnoremap <c-t> :Buffers<cr>
 nnoremap <c-\> :Rg<cr>
@@ -208,7 +182,16 @@ nnoremap <c-\> :Rg<cr>
 " Open up fuzzy search one directory above to fuzzy search in an adjacent path
 nnoremap <leader><C-p> :FZF<space>../
 
-" Toggle relative line numbers
+" Toggle between relative number and line number
+function! ToggleNumber()
+  if(!&relativenumber && !&number)
+    set number
+  elseif(!&relativenumber)
+    set relativenumber
+  else
+    set norelativenumber
+  endif
+endfunc
 nnoremap <c-n> :call ToggleNumber()<cr>
 
 " Count number of matches for the word under the cursor
@@ -219,6 +202,70 @@ nnoremap <c-l> <c-w><c-l>
 nnoremap <c-h> <c-w><c-h>
 nnoremap <c-k> <c-w><c-k>
 nnoremap <c-j> <c-w><c-j>
+
+" ---------------------
+" CoC mappings - Largely inspired by this example:
+" https://github.com/neoclide/coc.nvim#example-vim-configuration
+" --------------------
+" Shortcuts to next/previous diagnostic errors.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Common goto code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>d :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
+
+" --------------------
+" General options
+" --------------------
+colorscheme monokai
+filetype plugin indent on
+syntax on
 
 " --------------------
 " Settable options
@@ -247,30 +294,35 @@ set lazyredraw                      " Disable redraw during actions
 set list
 set listchars=tab:»·,trail:·,nbsp:·
 set mouse=a                         " Enable mouse support
+set nobackup                        " CoC: Some LSPs have issues with backups.
+set nowritebackup                   " CoC: Some LSPs have issues with backups.
 set nocompatible
-set nocursorline                    " highlight cursor line
+set nocursorline                    " Prevent cursor line hight
 set noshowmode
 set noswapfile
 set number
 set relativenumber                  " start with relative line numbers
 set shiftround
 set shiftwidth=2
+set shortmess+=c                    " CoC: No messages to |ins-completion-menu|.
 set showcmd                         " show the current command
+set signcolumn=auto
 set smartcase
 set splitbelow                      " put new split window below current
 set splitright                      " put new split window to the right
 set tabstop=2
 set textwidth=80
 set title                           " set the title to the value of 'titlestring'
-set ttyfast                         " more characters sent to the screen to for smoother redraws
-
-" Create undodir to hold persistent undo files if it doesn't exist.
-if !isdirectory($HOME."/.vim/undodir")
-  call mkdir($HOME."/.vim/undodir", "", 0700)
-endif
-set undodir=~/.vim/undodir          " Configure where undo files are stored
+set ttyfast                         " Foor smoother redraws
 set undofile                        " Persistent undo, even after closing vim
-
-set updatetime=100
+set updatetime=300
 set visualbell                      " Set visual bell instad of a 'BEEP'
-set wrap                            " wrap line when lines are longer than the window width
+set wrap                            " wrap lines longer than the window width
+
+if !has('nvim')
+  " Create undodir to hold persistent undo files if it doesn't exist.
+  if !isdirectory($HOME."/.vim/undodir")
+    call mkdir($HOME."/.vim/undodir", "", 0700)
+  endif
+  set undodir=~/.vim/undodir          " Configure where undo files are stored
+endif
