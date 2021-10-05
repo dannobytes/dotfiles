@@ -33,6 +33,7 @@ let g:coc_global_extensions = [
 \ 'coc-jest',
 \ 'coc-json',
 \ 'coc-marketplace',
+\ 'coc-stylelintplus',
 \ 'coc-svg',
 \ 'coc-tsserver',
 \ 'coc-yaml',
@@ -61,8 +62,13 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " --------------------
 " Configure fzf.vim
 " --------------------
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.9 } }
-let g:fzf_preview_window = ['right:60%', 'ctrl-/']
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+command! -bang -nargs=? -complete=dir Files
+\ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
+command! -bang -nargs=? -complete=dir Buffers
+\ call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
 
 " --------------------
 " Configure git gutter settings
@@ -112,7 +118,10 @@ if has("autocmd")
     autocmd BufEnter *.md setlocal formatoptions-=t
     autocmd BufEnter * setlocal formatoptions+=wj
     autocmd BufEnter * setlocal formatoptions-=c
-    autocmd FileType gitcommit setlocal formatoptions-=t
+  augroup END
+
+  augroup cocTweaks
+    autocmd FileType scss setlocal iskeyword+=@-@
   augroup END
 
   " Make `gf` work within files that have trouble with it.
@@ -172,7 +181,8 @@ nnoremap <silent> _ :exe "resize -5"<cr>
 " Search for whats visually selected
 vnoremap // y/\V<C-R>"<CR>
 
-" Entrypoints to open up new files or buffers via filename/keywords
+" Entrypoints to open up new files, commits, buffers via filename/keywords
+nnoremap <leader>B :BCommits<cr>
 nnoremap <leader>C :Commits<cr>
 nnoremap <leader>H :History<cr>
 nnoremap <c-p> :Files<cr>
