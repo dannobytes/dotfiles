@@ -47,7 +47,7 @@
   shls = stash list
   st = status
 [commit]
-  gpgsign = true
+  gpgSign = true
   verbose = true
 [core]
   editor = vim
@@ -70,6 +70,7 @@
   all = true
 [push]
   followTags = true
+  useForceIfIncludes = true
 [rebase]
   autoStash = true
   autoSquash = true
