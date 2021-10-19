@@ -185,6 +185,7 @@ vnoremap // y/\V<C-R>"<CR>
 nnoremap <leader>B :BCommits<cr>
 nnoremap <leader>C :Commits<cr>
 nnoremap <leader>H :History<cr>
+nnoremap <leader>G :GFiles?<cr>
 nnoremap <c-p> :Files<cr>
 nnoremap <c-t> :Buffers<cr>
 nnoremap <c-\> :Rg<cr>
