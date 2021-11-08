@@ -29,8 +29,8 @@
   re9 = rebase -i HEAD~9
   rebort = rebase --abort
   recont = rebase --continue
-  reom = rebase origin/master
-  reomain = rebase origin/main
+  reom = rebase origin/main
+  reomr = rebase origin/master
   rs = reset
   rs1 = reset HEAD~
   rs2 = reset HEAD~2
