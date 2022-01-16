@@ -14,6 +14,10 @@ alias which='type -a'
 # Git aliases
 alias gitsha="git rev-parse HEAD | tr -d '\n' | pbcopy && pbpaste && printf '\n'"
 
+# Alias vim to neovim to transition over slowly.
+alias vi='nvim'
+alias vim='nvim'
+
 # Silence the warning message to switch shells to zsh
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
@@ -40,9 +44,6 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Homebrew path
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
-
-# Keep ssh key in user chain.
-ssh-add -K ~/.ssh/id_rsa &>/dev/null
 
 # Setup GPG
 export GPG_TTY=$(tty)
