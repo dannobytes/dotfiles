@@ -41,8 +41,8 @@
   rs7 = reset HEAD~7
   rs8 = reset HEAD~8
   rs9 = reset HEAD~9
-  rsom = reset --hard origin/master
-  rsomain = reset --hard origin/main
+  rsom = reset --hard origin/main
+  rsomr = reset --hard origin/master
   sh = stash
   shls = stash list
   st = status
