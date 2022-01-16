@@ -6,8 +6,6 @@ Plug 'airblade/vim-gitgutter'     " Git gutter integration
 Plug 'ap/vim-css-color'           " CSS color previews
 Plug 'crusoexia/vim-monokai'      " Colors
 Plug 'editorconfig/editorconfig-vim'
-Plug 'vim-airline/vim-airline'        " Status line
-Plug 'vim-airline/vim-airline-themes' " Status line themes
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'moll/vim-node'              " Open files via ESM
@@ -20,6 +18,8 @@ Plug 'tpope/vim-fugitive'         " Git integration
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rhubarb'          " Enables :GBrowse
 Plug 'tpope/vim-surround'         " Matching surround pairs
+Plug 'vim-airline/vim-airline'        " Status line
+Plug 'vim-airline/vim-airline-themes' " Status line themes
 call plug#end()
 
 " --------------------
@@ -63,7 +63,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " Configure fzf.vim
 " --------------------
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
-let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+let g:fzf_preview_window = ['right:60%', 'ctrl-/']
 
 command! -bang -nargs=? -complete=dir Files
 \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
@@ -82,7 +82,7 @@ let g:netrw_liststyle = 0
 let g:netrw_keepdir = 1
 
 " --------------------
-" AUTO COMMANDS
+" Auto commands
 " --------------------
 if has("autocmd")
   " Apply custom color overrides whenever color scheme changes
@@ -151,7 +151,7 @@ if executable('rg')
 endif
 
 " --------------------
-" MAPPINGS
+" Mappings
 " --------------------
 let mapleader = "\<Space>"
 
@@ -162,6 +162,10 @@ nnoremap <leader>vrso :source $MYVIMRC<cr>
 " Shortcuts to work with windows and buffers easier
 nnoremap <leader>bb :b#<cr>
 nnoremap <leader>bd :ls<cr>:bd<space>
+
+" Shortcut command to clear all buffers except the current one.
+command! BufOnly silent! execute "%bd|e#|bd#"
+cnoreabbrev bo BufOnly
 
 " Turn off search highlighting
 nnoremap <leader>h :noh<cr>
