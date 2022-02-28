@@ -65,6 +65,8 @@
   prompt = false
 [mergetool "vimdiff"]
   cmd = vimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
+[pager]
+  branch = false
 [pull]
   rebase = true
   all = true
