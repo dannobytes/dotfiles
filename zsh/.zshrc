@@ -81,6 +81,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 plugins=(
   aliases
   git
+  git-open
   git-prompt
   zsh-autosuggestions
   zsh-syntax-highlighting
