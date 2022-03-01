@@ -52,6 +52,7 @@
 [core]
   editor = vim
   excludesfile = ~/.gitignore
+  pager = bat
 [diff]
   context = 5
 [init]
