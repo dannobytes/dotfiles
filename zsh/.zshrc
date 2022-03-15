@@ -75,7 +75,6 @@ plugins=(
   aliases
   git
   git-open
-  git-prompt
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-nvm
@@ -113,9 +112,19 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # ==================================
 # My custom config below
 # ==================================
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # Show hidden dot files when tab completing
 setopt globdots
+
+# Disable NOMATCH error messages when glob patterns don't match.
+# This is helpful when using RG search, e.g. `rg import.*`.
+setopt nonomatch
 
 # Always default Vim to Neovim
 alias vi="nvim"
@@ -139,7 +148,7 @@ export FZF_DEFAULT_COMMAND='rg --ignore-file .gitignore --glob "!{.git,node_modu
 # https://github.com/sharkdp/bat
 # ==============================
 # Set "bat" config path to my dotfiles config
-export BAT_CONFIG_PATH="$HOME/projects/dotfiles/bat/bat.conf"
+export BAT_CONFIG_PATH="$HOME/Code/dotfiles/bat/bat.conf"
 
 # Use "bat" as the colorizing pager for "man"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -155,12 +164,5 @@ fi
 # ==============================
 # Powerlevel10k config
 # ==============================
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
