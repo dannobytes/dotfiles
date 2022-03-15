@@ -41,6 +41,7 @@ let g:coc_global_extensions = [
 \ 'coc-jest',
 \ 'coc-json',
 \ 'coc-marketplace',
+\ 'coc-prettier',
 \ 'coc-stylelintplus',
 \ 'coc-svg',
 \ 'coc-tsserver',
@@ -139,21 +140,27 @@ if has("autocmd")
   augroup END
 endif
 
-" Type `\` to initiate an rg search across all files in a quickfix window
+" --------------------------------------
+" Use RipGrep as my default grep search.
+" --------------------------------------
 if executable('rg')
   set grepprg=rg\ --smart-case\ --vimgrep\ --no-heading\ --follow
   set grepformat=%f:%l:%c:%m,%f:%l:%m
   function! MySearch()
     let grep_term = input("Enter search term: ")
     if !empty(grep_term)
-      execute 'silent grep!' grep_term | copen 10
+      execute 'silent grep!' shellescape(grep_term) | copen 10
     else
       echo "Empty search term"
     endif
     redraw!
   endfunction
   command! Search call MySearch()
+
+  " Type `\` to initiate grep search across all files in a quickfix window.
   nnoremap \ :Search<CR>
+
+  " Shortcut to grep search the word under the cursor in normal/visual mode.
   nnoremap \\ "ayiw :Search<CR><C-r>a<CR>
   vnoremap \\ "ay :Search<CR>'<C-r>a'<CR>
 endif
@@ -191,13 +198,14 @@ nnoremap <silent> + :exe "resize +5"<cr>
 nnoremap <silent> _ :exe "resize -5"<cr>
 
 " Search for whats visually selected
+nnoremap // yiw/\V<C-R>"<CR>
 vnoremap // y/\V<C-R>"<CR>
 
 " Entrypoints to open up new files, commits, buffers via filename/keywords
 nnoremap <leader>B :BCommits<cr>
 nnoremap <leader>C :Commits<cr>
 nnoremap <leader>H :History<cr>
-nnoremap <leader>G :GFiles?<cr>
+nnoremap <leader>? :GFiles?<cr>
 nnoremap <c-p> :Files<cr>
 nnoremap <c-t> :Buffers<cr>
 nnoremap <c-\> :Rg<cr>
