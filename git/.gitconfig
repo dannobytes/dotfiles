@@ -13,8 +13,8 @@
   logl = log --oneline
   logp = log -p
   logs = log --stat
-  meom = merge origin/main
-  meon = merge origin/next
+  mrom = merge origin/main
+  mron = merge origin/next
   mt = mergetool
   pu = pull --prune
   pushf= push --force-with-lease
