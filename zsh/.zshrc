@@ -9,7 +9,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -71,14 +70,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  aliases
-  git
-  git-open
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  zsh-nvm
-)
+# plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -109,9 +101,14 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# ==================================
-# My custom config below
-# ==================================
+
+
+# -------------------------------------------------------------------
+# ===================================================================
+# MY CUSTOM CONFIG BELOW
+# ===================================================================
+# -------------------------------------------------------------------
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -132,6 +129,31 @@ alias vim="nvim"
 
 # Setup GPG key to sign git commits
 export GPG_TTY=$(tty)
+
+# ==============================
+# Antigen plugin manager
+# https://github.com/zsh-users/antigen
+# ==============================
+source /opt/homebrew/share/antigen/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle aliases
+antigen bundle command-not-found
+antigen bundle git
+
+# Bundles from external repos, e.g. "scope/plugin-name".
+antigen bundle paulirish/git-open
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load my one preferred theme.
+antigen theme romkatv/powerlevel10k
+
+# Tell Antigen that you're done.
+antigen apply
 
 # ==============================
 # FZF config
