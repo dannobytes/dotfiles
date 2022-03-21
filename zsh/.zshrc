@@ -99,7 +99,6 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 
@@ -134,7 +133,11 @@ export GPG_TTY=$(tty)
 # Antigen plugin manager
 # https://github.com/zsh-users/antigen
 # ==============================
-source /opt/homebrew/share/antigen/antigen.zsh
+if [[ -r "/usr/local/share/antigen" ]]; then
+  source /usr/local/share/antigen/antigen.zsh
+else
+  source /opt/homebrew/share/antigen/antigen.zsh
+fi
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
