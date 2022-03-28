@@ -108,27 +108,6 @@ fi
 # ===================================================================
 # -------------------------------------------------------------------
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Show hidden dot files when tab completing
-setopt globdots
-
-# Disable NOMATCH error messages when glob patterns don't match.
-# This is helpful when using RG search, e.g. `rg import.*`.
-setopt nonomatch
-
-# Always default Vim to Neovim
-alias vi="nvim"
-alias vim="nvim"
-
-# Setup GPG key to sign git commits
-export GPG_TTY=$(tty)
-
 # ==============================
 # Antigen plugin manager
 # https://github.com/zsh-users/antigen
@@ -150,6 +129,7 @@ antigen bundle git
 # Bundles from external repos, e.g. "scope/plugin-name".
 antigen bundle paulirish/git-open
 antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load my one preferred theme.
@@ -157,6 +137,33 @@ antigen theme romkatv/powerlevel10k
 
 # Tell Antigen that you're done.
 antigen apply
+
+# ==============================
+# Powerlevel10k instant prompt must come after the plugin manager.
+# ==============================
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# ==============================
+# Options, aliases and exports
+# ==============================
+# Show hidden dot files when tab completing
+setopt globdots
+
+# Disable NOMATCH error messages when glob patterns don't match.
+# This is helpful when using RG search, e.g. `rg import.*`.
+setopt nonomatch
+
+# Always default Vim to Neovim
+alias vi="nvim"
+alias vim="nvim"
+
+# Setup GPG key to sign git commits
+export GPG_TTY=$(tty)
 
 # ==============================
 # FZF config
