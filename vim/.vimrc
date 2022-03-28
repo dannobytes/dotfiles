@@ -216,7 +216,7 @@ nnoremap <c-\> :Rg<cr>
 function! RgPrompt()
   let query = input("Enter Rg pattern: ")
   if !empty(query)
-    execute 'Rg' shellescape(query)
+    execute 'Rg' query
   endif
 endfunction
 command! RgSearch call RgPrompt()
