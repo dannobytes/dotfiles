@@ -97,7 +97,7 @@ if has("autocmd")
   " Apply custom color overrides whenever color scheme changes
   function! CustomHighlights()
     highlight CocErrorFloat ctermfg=green guifg=green
-    highlight Visual ctermbg=darkblue
+    highlight Visual ctermbg=54 ctermfg=7
     highlight Search ctermbg=78
     highlight GitGutterDelete guifg=#ff5f87 ctermfg=204
   endfunc
@@ -130,6 +130,7 @@ if has("autocmd")
   augroup END
 
   augroup cocTweaks
+    autocmd FileType css setl iskeyword+=-
     autocmd FileType scss setlocal iskeyword+=@-@
   augroup END
 
@@ -201,6 +202,7 @@ nnoremap <silent> _ :exe "resize -5"<cr>
 nnoremap // yiw/\V<C-R>"<CR>
 vnoremap // y/\V<C-R>"<CR>
 
+" fzf-vim command mappings
 " Entrypoints to open up new files, commits, buffers via filename/keywords
 nnoremap <leader>B :BCommits<cr>
 nnoremap <leader>C :Commits<cr>
@@ -209,6 +211,16 @@ nnoremap <leader>? :GFiles?<cr>
 nnoremap <c-p> :Files<cr>
 nnoremap <c-t> :Buffers<cr>
 nnoremap <c-\> :Rg<cr>
+
+" Create shortcut command to perform a custom :Rg search based on input.
+function! RgPrompt()
+  let query = input("Enter Rg pattern: ")
+  if !empty(query)
+    execute 'Rg' shellescape(query)
+  endif
+endfunction
+command! RgSearch call RgPrompt()
+nnoremap <leader><c-\> :RgSearch<cr>
 
 " Open up fuzzy search one directory above to fuzzy search in an adjacent path
 nnoremap <leader><C-p> :FZF<space>../
