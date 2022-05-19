@@ -109,6 +109,15 @@ fi
 # -------------------------------------------------------------------
 
 # ==============================
+# Homebrew installation
+# ==============================
+if [[ -r "/usr/local/homebrew" ]]; then
+  eval "$(/usr/local/homebrew/bin/brew shellenv)"
+else
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# ==============================
 # Antigen plugin manager
 # https://github.com/zsh-users/antigen
 # ==============================
@@ -160,7 +169,7 @@ setopt nonomatch
 
 # Always default Vim to Neovim
 alias vi="nvim"
-alias vim="nvim"
+alias vim="vim"
 
 # Setup GPG key to sign git commits
 export GPG_TTY=$(tty)
@@ -173,7 +182,7 @@ export GPG_TTY=$(tty)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Tell FZF to use ripgrep
-export FZF_DEFAULT_COMMAND='rg --ignore-file .gitignore --glob "!{.git,node_modules}/*" --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
+export FZF_DEFAULT_COMMAND='rg --glob "!{.git}/*" --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
 
 # ==============================
 # BAT config

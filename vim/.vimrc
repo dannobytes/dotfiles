@@ -14,6 +14,7 @@ Plug 'airblade/vim-gitgutter'     " Git gutter integration
 Plug 'ap/vim-css-color'           " CSS color previews
 Plug 'crusoexia/vim-monokai'      " Colors
 Plug 'editorconfig/editorconfig-vim'
+Plug 'iloginow/vim-stylus'        " Stylus syntax
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'moll/vim-node'              " Open files via ESM
@@ -72,7 +73,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " Configure fzf.vim
 " --------------------
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
-let g:fzf_preview_window = ['right:60%', 'ctrl-/']
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
 command! -bang -nargs=? -complete=dir Files
 \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
@@ -87,8 +88,10 @@ let g:gitgutter_diff_relative_to = 'index'
 " --------------------
 " Configure netrw directory view
 " --------------------
-let g:netrw_liststyle = 0
 let g:netrw_keepdir = 1
+let g:netrw_liststyle = 0
+let g:netrw_sort_by = "name"
+let g:netrw_winsize = 30
 
 " --------------------
 " Auto commands
@@ -98,8 +101,9 @@ if has("autocmd")
   function! CustomHighlights()
     highlight CocErrorFloat ctermfg=green guifg=green
     highlight Visual ctermbg=54 ctermfg=7
-    highlight Search ctermbg=78
+    highlight Search ctermbg=219
     highlight GitGutterDelete guifg=#ff5f87 ctermfg=204
+    highlight link netrwMarkFile Search
   endfunc
   augroup customHighlights
     autocmd!
@@ -118,6 +122,7 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.hamlc set filetype=haml
     autocmd BufRead,BufNewFile *.pug set filetype=pug
     autocmd BufRead,BufNewFile *.coffee set filetype=coffee
+    autocmd BufRead,BufNewFile *.md set shiftwidth=2
   augroup END
 
   " Extend my own custom format options to specific file types.
@@ -150,7 +155,7 @@ if executable('rg')
   function! MySearch()
     let grep_term = input("Enter search term: ")
     if !empty(grep_term)
-      execute 'silent grep!' shellescape(grep_term) | copen 10
+      execute 'silent grep!' grep_term | copen 10
     else
       echo "Empty search term"
     endif
@@ -210,7 +215,7 @@ nnoremap <leader>H :History<cr>
 nnoremap <leader>? :GFiles?<cr>
 nnoremap <c-p> :Files<cr>
 nnoremap <c-t> :Buffers<cr>
-nnoremap <c-\> :Rg<cr>
+" nnoremap <c-\> :Rg<space>
 
 " Create shortcut command to perform a custom :Rg search based on input.
 function! RgPrompt()
@@ -220,10 +225,10 @@ function! RgPrompt()
   endif
 endfunction
 command! RgSearch call RgPrompt()
-nnoremap <leader><c-\> :RgSearch<cr>
+nnoremap <c-\> :RgSearch<cr>
 
 " Open up fuzzy search one directory above to fuzzy search in an adjacent path
-nnoremap <leader><C-p> :FZF<space>../
+nnoremap <leader><c-p> :FZF<space>../
 
 " Toggle between relative number and line number
 function! ToggleNumber()
