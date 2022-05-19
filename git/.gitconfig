@@ -13,6 +13,8 @@
   logl = log --oneline
   logp = log -p
   logs = log --stat
+  mrbort = merge --abort
+  mrcont = merge --continue
   mrom = merge origin/main
   mron = merge origin/next
   mt = mergetool
