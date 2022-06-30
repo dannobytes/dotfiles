@@ -167,6 +167,9 @@ setopt globdots
 # This is helpful when using RG search, e.g. `rg import.*`.
 setopt nonomatch
 
+# Easy access to last git commit sha
+alias gitsha="git rev-parse HEAD | tr -d '\n' | pbcopy && pbpaste && printf '\n'"
+
 # Always default Vim to Neovim
 alias vi="nvim"
 alias vim="vim"
