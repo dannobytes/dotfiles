@@ -14,6 +14,7 @@ Plug 'airblade/vim-gitgutter'     " Git gutter integration
 Plug 'ap/vim-css-color'           " CSS color previews
 Plug 'crusoexia/vim-monokai'      " Colors
 Plug 'editorconfig/editorconfig-vim'
+Plug 'github/copilot.vim'         " GitHub Copilot
 Plug 'iloginow/vim-stylus'        " Stylus syntax
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -30,6 +31,11 @@ Plug 'tpope/vim-surround'         " Matching surround pairs
 Plug 'vim-airline/vim-airline'        " Status line
 Plug 'vim-airline/vim-airline-themes' " Status line themes
 call plug#end()
+
+" -----------------------
+" Python provider config
+" -----------------------
+let g:python3_host_prog = '/usr/bin/python3'
 
 " --------------------
 " CoC config
