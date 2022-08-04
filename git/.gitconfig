@@ -63,16 +63,18 @@
 [init]
   defaultBranch = main
 [merge]
-  conflictstyle = diff3
+  conflictstyle = merge
   ff = false
-  tool = vimdiff
+  tool = nvimdiff
 [mergetool]
   keepBackup = false
-  prompt = false
-[mergetool "vimdiff"]
-  cmd = vimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
+  prompt = true
+[mergetool.vimdiff]
+  # layout = "MERGED,(LOCAL/BASE/REMOTE)"
+  layout = MERGED
 [pager]
   branch = false
+  stash = false
 [pull]
   rebase = true
   all = true
