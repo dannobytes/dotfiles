@@ -111,8 +111,8 @@ fi
 # ==============================
 # Homebrew installation
 # ==============================
-if [[ -r "/usr/local/homebrew" ]]; then
-  eval "$(/usr/local/homebrew/bin/brew shellenv)"
+if [[ -r "/usr/local/bin/brew" ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
 else
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
@@ -210,3 +210,10 @@ fi
 # ==============================
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# ==============================
+# NVM config
+# ==============================
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
