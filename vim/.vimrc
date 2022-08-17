@@ -105,7 +105,26 @@ let g:netrw_winsize = 30
 if has("autocmd")
   " Apply custom color overrides whenever color scheme changes
   function! CustomHighlights()
-    highlight CocErrorFloat ctermfg=green guifg=green
+    highlight DiagnosticError ctermfg=210
+    highlight DiagnosticWarn ctermfg=215
+    highlight DiagnosticInfo ctermfg=157
+    highlight DiagnosticHint ctermfg=159
+
+    " CoC colors
+    highlight CocFloating ctermfg=189 ctermbg=235
+    highlight CocFloatDividingLine ctermfg=245
+    highlight! link CocErrorFloat DiagnosticError
+    highlight! link CocWarningFloat DiagnosticWarn
+    highlight! link CocInfoFloat DiagnosticInfo
+    highlight! link CocHintFloat DiagnosticHint
+    highlight CocErrorHighlight ctermfg=204
+    highlight CocWarningHighlight ctermfg=209
+    highlight CocInfoHighlight ctermfg=186
+    highlight CocHintHighlight ctermfg=115
+    highlight CocPumSearch ctermfg=208
+    highlight CocNotificationProgress ctermfg=208
+    highlight CocHighlightText ctermbg=58
+
     highlight Visual ctermbg=54 ctermfg=7
     highlight Search ctermbg=219
     highlight GitGutterDelete guifg=#ff5f87 ctermfg=204
@@ -125,10 +144,12 @@ if has("autocmd")
   " Apply file types to extensions not recognized.
   augroup fileTypes
     autocmd!
-    autocmd BufRead,BufNewFile *.hamlc set filetype=haml
-    autocmd BufRead,BufNewFile *.pug set filetype=pug
     autocmd BufRead,BufNewFile *.coffee set filetype=coffee
+    autocmd BufRead,BufNewFile *.hamlc set filetype=haml
     autocmd BufRead,BufNewFile *.md set shiftwidth=2
+    autocmd BufRead,BufNewFile *.pug set filetype=pug
+    autocmd BufRead,BufNewFile .eslintignore set filetype=gitignore
+    autocmd BufRead,BufNewFile .stylelintignore set filetype=gitignore
   augroup END
 
   " Extend my own custom format options to specific file types.

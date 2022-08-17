@@ -1,9 +1,14 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "jsx",
-    "markdown",
-    "scss"
-  ],
-  "eslint.autoFixOnSave": true
+  "coc.preferences.formatOnSaveFiletypes": ["json", "js", "jsx", "markdown"],
+  "eslint.autoFixOnSave": true,
+  "stylelintplus.autoFixOnSave": true,
+  "suggest.minTriggerInputLength": 3,
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.removeDuplicateItems": true,
+  "suggest.preferCompleteThanJumpPlaceholder": true,
+
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "wxss.validate": false
 }
