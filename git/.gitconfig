@@ -1,6 +1,6 @@
 [alias]
   addp = add -p
-  br = branch
+  br = branch -v
   ch = cherry-pick
   ci = commit
   cia = commit --amend
@@ -13,6 +13,7 @@
   logl = log --oneline
   logp = log -p
   logs = log --stat
+  mr = merge
   mrbort = merge --abort
   mrcont = merge --continue
   mrom = merge origin/main

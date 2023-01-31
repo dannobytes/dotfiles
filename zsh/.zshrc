@@ -117,6 +117,14 @@ else
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# Enable completions
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  autoload -Uz compinit
+  compinit
+fi
+
 # ==============================
 # Antigen plugin manager
 # https://github.com/zsh-users/antigen

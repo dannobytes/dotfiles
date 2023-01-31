@@ -49,6 +49,7 @@ let g:coc_global_extensions = [
 \ 'coc-json',
 \ 'coc-marketplace',
 \ 'coc-prettier',
+\ 'coc-snippets',
 \ 'coc-stylelintplus',
 \ 'coc-svg',
 \ 'coc-tsserver',
@@ -112,6 +113,7 @@ if has("autocmd")
 
     " CoC colors
     highlight CocFloating ctermfg=189 ctermbg=235
+    highlight CocFloatActive ctermfg=209
     highlight CocFloatDividingLine ctermfg=245
     highlight! link CocErrorFloat DiagnosticError
     highlight! link CocWarningFloat DiagnosticWarn
@@ -203,7 +205,10 @@ endif
 " --------------------
 let mapleader = "\<Space>"
 
-" Shortucts to open vimrc and re-source it
+" Shortcut to sort all lines within the current curly block
+nnoremap <leader>sor vi{:sor<cr><c-o>
+
+" Shortcuts to edit or source my .vimrc file
 nnoremap <leader>vrc :edit $MYVIMRC<cr>
 nnoremap <leader>vrso :source $MYVIMRC<cr>
 
@@ -282,6 +287,9 @@ nnoremap <c-j> <c-w><c-j>
 " CoC mappings - Largely inspired by this example:
 " https://github.com/neoclide/coc.nvim#example-vim-configuration
 " --------------------
+" Confirm completion by pressing enter.
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
 " Shortcuts to next/previous diagnostic errors.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
