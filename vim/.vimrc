@@ -128,7 +128,7 @@ if has("autocmd")
     highlight CocHighlightText ctermbg=58
 
     highlight Visual ctermbg=54 ctermfg=7
-    highlight Search ctermbg=219
+    highlight Search ctermbg=183
     highlight GitGutterDelete guifg=#ff5f87 ctermfg=204
     highlight link netrwMarkFile Search
   endfunc
