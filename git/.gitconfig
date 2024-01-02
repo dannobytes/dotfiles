@@ -1,6 +1,8 @@
 [alias]
   addp = add -p
   br = branch -v
+  brgone = "!git branch -v | grep gone"
+  brprune = "!git branch -v | grep gone | awk '{print $1}' | xargs git branch -D"
   ch = cherry-pick
   ci = commit
   cia = commit --amend
@@ -53,6 +55,7 @@
   sh = stash
   shls = stash list
   st = status
+  wt = worktree
 [commit]
   gpgSign = true
   verbose = true
