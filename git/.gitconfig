@@ -1,6 +1,7 @@
 [alias]
   addp = add -p
-  br = branch -v
+  br = branch
+  brv = branch --verbose
   brgone = "!git branch -v | grep gone"
   brprune = "!git branch -v | grep gone | awk '{print $1}' | xargs git branch -D"
   ch = cherry-pick
@@ -60,7 +61,7 @@
   gpgSign = true
   verbose = true
 [core]
-  editor = vim
+  editor = nvim
   excludesfile = ~/.gitignore
 [diff]
   context = 5

@@ -122,7 +122,7 @@ if has("autocmd")
     highlight! link CocWarningFloat DiagnosticWarn
     highlight! link CocInfoFloat DiagnosticInfo
     highlight! link CocHintFloat DiagnosticHint
-    highlight CocErrorHighlight ctermfg=204
+    highlight CocErrorHighlight ctermfg=204 cterm=none
     highlight CocWarningHighlight ctermfg=209
     highlight CocInfoHighlight ctermfg=186
     highlight CocHintHighlight ctermfg=115
@@ -294,6 +294,7 @@ nnoremap <c-j> <c-w><c-j>
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " Shortcuts to next/previous diagnostic errors.
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
@@ -304,14 +305,12 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
+nnoremap <silent> K :call ShowDocumentation()<CR>
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')
   else
-    execute '!' . &keywordprg . " " . expand('<cword>')
+    call feedkeys('K', 'in')
   endif
 endfunction
 
@@ -324,6 +323,8 @@ nmap <leader>f  <Plug>(coc-format-selected)
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+" Remap keys for apply code actions affect whole buffer
+nmap <leader>as  <Plug>(coc-codeaction-source)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
@@ -345,6 +346,8 @@ nnoremap <silent><nowait> <space>e :<C-u>CocList extensions<cr>
 nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 
 " --------------------
 " General options

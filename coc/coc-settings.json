@@ -1,14 +1,35 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["json", "js", "jsx", "markdown"],
+  "coc.preferences.formatOnSave": true,
+  "coc.preferences.formatOnType": false,
+  "diagnostic.floatConfig": {
+    "border": true,
+    "rounded": true,
+    "title": " 🙊"
+  },
+  "diagnostic.errorSign": "💥",
+  "diagnostic.infoSign": "❔",
+  "diagnostic.warningSign": "⚠️",
   "eslint.autoFixOnSave": true,
+  "hover.floatConfig": {
+    "border": true,
+    "rounded": true,
+    "title": " ℹ"
+  },
+  "stylelintplus.autoFixOnFormat": true,
   "stylelintplus.autoFixOnSave": true,
+  "stylelintplus.enable": true,
+  "stylelintplus.validateOnSave": true,
+  "suggest.floatConfig": {
+    "border": true,
+    "rounded": true
+  },
   "suggest.minTriggerInputLength": 3,
-  "suggest.triggerAfterInsertEnter": true,
-  "suggest.removeDuplicateItems": true,
+  "suggest.noselect": false,
   "suggest.preferCompleteThanJumpPlaceholder": true,
+  "suggest.removeDuplicateItems": true,
+  "suggest.triggerAfterInsertEnter": true,
 
   "css.validate": false,
   "less.validate": false,
-  "scss.validate": false,
-  "wxss.validate": false
+  "scss.validate": false
 }

@@ -83,9 +83,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vi'
+  export EDITOR='nvim'
 else
-  export EDITOR='vi'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -166,6 +166,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # ==============================
+# Powerlevel10k config
+# ==============================
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# ==============================
 # Options, aliases and exports
 # ==============================
 # Show hidden dot files when tab completing
@@ -180,7 +186,7 @@ alias gitsha="git rev-parse HEAD | tr -d '\n' | pbcopy && pbpaste && printf '\n'
 
 # Always default Vim to Neovim
 alias vi="nvim"
-alias vim="vim"
+alias vim="nvim"
 
 # Setup GPG key to sign git commits
 export GPG_TTY=$(tty)
@@ -214,14 +220,20 @@ if [[ -z "$TMUX" ]] ;then
 fi
 
 # ==============================
-# Powerlevel10k config
-# ==============================
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# ==============================
 # NVM config
 # ==============================
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# ==============================
+# pyenv shell integration
+# ==============================
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# ==============================
+# n config
+# ==============================
+export N_PRESERVE_NPM=0
