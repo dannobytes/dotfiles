@@ -1,4 +1,18 @@
 {
+  // Code lens settings
+  "codeLens.enable": true,
+  "codeLens.display": true,
+  "codeLens.position": "eol",
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.implementationsCodeLens.enabled": false,
+
+  // Formatting
+  "prettier.tabWidth": 2,
+  "prettier.enable": true,
+  "prettier.singleQuote": true,
+  "prettier.useTabs": false,
+  "prettier.printWidth": 80,
+  "prettier.semi": true,
   "coc.preferences.formatOnSave": true,
   "coc.preferences.formatOnType": false,
   "diagnostic.floatConfig": {
