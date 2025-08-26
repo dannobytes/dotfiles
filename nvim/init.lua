@@ -280,7 +280,7 @@ vim.cmd('colorscheme monokai')
 vim.cmd('syntax on')
 
 --------------------------------
--- Start LUA configuration setup
+-- LUA configuration setup
 --------------------------------
 require('coding')
 require('coding_markdown')

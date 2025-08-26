@@ -1,4 +1,4 @@
-vim.g.markdown_fenced_languages = {'html', 'javascript', 'typescript', 'typescriptreact', 'css', 'scss', 'bash=sh', 'json', 'yaml', 'python', 'ruby', 'lua', 'vim'}
+vim.g.markdown_fenced_languages = {'html', 'javascript', 'typescript', 'typescriptreact', 'css', 'scss', 'bash=sh', 'json', 'yaml', 'python', 'lua', 'vim'}
 
 require("codecompanion").setup({
     adapters = {
