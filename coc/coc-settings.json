@@ -29,7 +29,12 @@
   "suggest.removeDuplicateItems": true,
   "suggest.triggerAfterInsertEnter": true,
 
+  // To make stylelint supposedly work better.
   "css.validate": false,
   "less.validate": false,
-  "scss.validate": false
+  "scss.validate": false,
+
+  // Use local TS version instead of deafult.
+  "tsserver.useLocalTsdk": true,
+  "tsserver.tsdk": "${workspaceFolder}/node_modules/typescript/lib"
 }

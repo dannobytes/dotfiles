@@ -29,6 +29,11 @@ Plug 'tpope/vim-rhubarb'          " Enables :GBrowse
 Plug 'tpope/vim-surround'         " Matching surround pairs
 Plug 'vim-airline/vim-airline'        " Status line
 Plug 'vim-airline/vim-airline-themes' " Status line themes
+" CodeCompanion installation
+" https://codecompanion.olimorris.dev/installation.html#vim-plug
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'olimorris/codecompanion.nvim'
 call plug#end()
 
 " -----------------------
@@ -250,7 +255,6 @@ nnoremap <leader>H :History<cr>
 nnoremap <leader>? :GFiles?<cr>
 nnoremap <c-p> :Files<cr>
 nnoremap <c-t> :Buffers<cr>
-" nnoremap <c-\> :Rg<space>
 
 " Create shortcut command to perform a custom :Rg search based on input.
 function! RgPrompt()
@@ -385,7 +389,6 @@ set listchars=tab:»·,trail:·,nbsp:·
 set mouse=a                         " Enable mouse support
 set nobackup                        " CoC: Some LSPs have issues with backups.
 set nowritebackup                   " CoC: Some LSPs have issues with backups.
-set nocompatible
 set nocursorline                    " Prevent cursor line hight
 set noshowmode
 set noswapfile
@@ -402,7 +405,6 @@ set splitright                      " put new split window to the right
 set tabstop=2
 set textwidth=80
 set title                           " set the title to the value of 'titlestring'
-set ttyfast                         " Foor smoother redraws
 set undofile                        " Persistent undo, even after closing vim
 set updatetime=300
 set visualbell                      " Set visual bell instad of a 'BEEP'

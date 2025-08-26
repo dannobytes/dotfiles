@@ -196,7 +196,7 @@ export GPG_TTY=$(tty)
 # https://github.com/junegunn/fzf
 # ==============================
 # This is auto-added by FZF install script.
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && source <(fzf --zsh)
 
 # Tell FZF to use ripgrep
 export FZF_DEFAULT_COMMAND='rg --glob "!{.git}/*" --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
