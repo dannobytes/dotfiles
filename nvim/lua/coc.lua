@@ -93,13 +93,12 @@ vim.keymap.set('v', '<C-b>', function()
 end, { expr = true, silent = true, nowait = true })
 
 -- Show all diagnostics.
--- nnoremap <silent><nowait> <space>d :<C-u>CocList diagnostics<cr>
-vim.keymap.set('n', '<space>d', '<Cmd>CocList diagnostics<CR>', { silent = true, nowait = true })
+vim.keymap.set('n', '<leader>d', '<Cmd>CocList diagnostics<CR>', { silent = true, nowait = true })
 -- Manage extensions.
-vim.keymap.set('n', '<space>e', '<Cmd>CocList extensions<CR>', { silent = true, nowait = true })
+vim.keymap.set('n', '<leader>e', '<Cmd>CocList extensions<CR>', { silent = true, nowait = true })
 -- Show commands.
-vim.keymap.set('n', '<space>c', '<Cmd>CocList commands<CR>', { silent = true, nowait = true, })
+vim.keymap.set('n', '<leader>c', '<Cmd>CocList commands<CR>', { silent = true, nowait = true, })
 -- Find symbol of current document.
-vim.keymap.set('n', '<space>o', '<Cmd>CocList outline<CR>', { silent = true, nowait = true, })
+vim.keymap.set('n', '<leader>o', '<Cmd>CocList outline<CR>', { silent = true, nowait = true, })
 -- Search workspace symbols
-vim.keymap.set('n', '<space>s', '<Cmd>CocList -I symbols<CR>', { silent = true })
+vim.keymap.set('n', '<leader>s', '<Cmd>CocList -I symbols<CR>', { silent = true })

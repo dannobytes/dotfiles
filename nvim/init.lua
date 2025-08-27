@@ -1,3 +1,7 @@
+-- Configure leader keys as early as possible.
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 vim.cmd [[
 " Automatic installation for vim-plug
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
@@ -16,8 +20,7 @@ Plug 'ap/vim-css-color'           " CSS color previews
 Plug 'crusoexia/vim-monokai'      " Colors
 Plug 'editorconfig/editorconfig-vim'
 Plug 'iloginow/vim-stylus'        " Stylus syntax
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'ibhagwan/fzf-lua'
 Plug 'moll/vim-node'              " Open files via ESM
 Plug 'neoclide/coc.nvim', {'branch': 'release'}   " LSP client
 Plug 'sheerun/vim-polyglot'       " Syntax highlighting for many languages
@@ -69,17 +72,6 @@ let g:airline#extensions#tabline#tab_min_count = 2
 " Configure editorconfig plugin to work well with fugitive.
 " --------------------
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-
-" --------------------
-" Configure fzf.vim
-" --------------------
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
-let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-
-command! -bang -nargs=? -complete=dir Files
-\ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
-command! -bang -nargs=? -complete=dir Buffers
-\ call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
 
 " --------------------
 " Configure git gutter settings
@@ -207,5 +199,6 @@ vim.cmd('syntax on')
 require('coc')
 require('coding')
 require('coding_markdown')
+require('fzf')
 require('mappings')
 require('options')

@@ -1,6 +1,3 @@
-vim.g.markdown_fenced_languages = { 'html', 'javascript', 'typescript', 'typescriptreact', 'css', 'scss', 'bash=sh',
-  'json', 'yaml', 'python', 'lua', 'vim' }
-
 require("codecompanion").setup({
   adapters = {
     anthropic = function()
@@ -28,3 +25,30 @@ require("codecompanion").setup({
     },
   },
 })
+
+-- Enable syntax highlighting in markdown code blocks for the following languages
+vim.g.markdown_fenced_languages = {
+  'bash=sh',
+  'css',
+  'html',
+  'javascript',
+  'json',
+  'lua',
+  'python',
+  'scss',
+  'typescript',
+  'typescriptreact',
+  'vim',
+  'yaml',
+}
+
+-----------------
+-- Key mappings
+-- https://codecompanion.olimorris.dev/getting-started.html#suggested-plugin-workflow
+-----------------
+vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<LocalLeader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+
+-- Expand 'cc' into 'CodeCompanion' in the command line
+vim.cmd([[cab cc CodeCompanion]])
