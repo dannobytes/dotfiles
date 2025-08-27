@@ -1,4 +1,4 @@
-vim.cmd[[
+vim.cmd [[
 " Automatic installation for vim-plug
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -46,26 +46,6 @@ call plug#end()
 " Python provider config
 " -----------------------
 let g:python3_host_prog = '/usr/bin/python3'
-
-" --------------------
-" CoC config
-" https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-" --------------------
-let g:coc_global_extensions = [
-\ 'coc-css',
-\ 'coc-eslint',
-\ 'coc-html',
-\ 'coc-jest',
-\ 'coc-json',
-\ 'coc-marketplace',
-\ 'coc-prettier',
-\ 'coc-snippets',
-\ 'coc-stylelintplus',
-\ 'coc-svg',
-\ 'coc-tsserver',
-\ 'coc-yaml',
-\ 'coc-yank',
-\]
 
 " Prevent missing cursor after :CocList
 let g:coc_disable_transparent_cursor = 1
@@ -213,64 +193,6 @@ if executable('rg')
   nnoremap \\ "ayiw :Search<CR><C-r>a<CR>
   vnoremap \\ "ay :Search<CR>'<C-r>a'<CR>
 endif
-
-" --------------------
-" Settable options
-" --------------------
-set autoindent
-set autoread                        " display file changes immediately
-set autowrite
-set autowriteall
-set backspace=indent,eol,start      " allow backspacing over everything
-set clipboard=unnamed
-set colorcolumn=80
-set conceallevel=0
-set copyindent
-set diffopt=vertical                " gdiff in vertical splits
-set encoding=utf-8
-set expandtab
-set formatoptions+=wj
-set hidden                          " Allow dirty buffers
-set history=500
-set hlsearch
-set ignorecase
-set incsearch
-set isfname+=@-@                    " Always include `@` char in file names
-set laststatus=2                    " Always show status line
-set lazyredraw                      " Disable redraw during actions
-set list
-set listchars=tab:»·,trail:·,nbsp:·
-set mouse=a                         " Enable mouse support
-set nobackup                        " CoC: Some LSPs have issues with backups.
-set nowritebackup                   " CoC: Some LSPs have issues with backups.
-set nocursorline                    " Prevent cursor line hight
-set noshowmode
-set noswapfile
-set number
-set relativenumber                  " start with relative line numbers
-set shiftround
-set shiftwidth=2
-set shortmess+=c                    " CoC: No messages to |ins-completion-menu|.
-set showcmd                         " show the current command
-set signcolumn=auto
-set smartcase
-set splitbelow                      " put new split window below current
-set splitright                      " put new split window to the right
-set tabstop=2
-set textwidth=80
-set title                           " set the title to the value of 'titlestring'
-set undofile                        " Persistent undo, even after closing vim
-set updatetime=300
-set visualbell                      " Set visual bell instad of a 'BEEP'
-set wrap                            " wrap lines longer than the window width
-
-if !has('nvim')
-  " Create undodir to hold persistent undo files if it doesn't exist.
-  if !isdirectory($HOME."/.vim/undodir")
-    call mkdir($HOME."/.vim/undodir", "", 0700)
-  endif
-  set undodir=~/.vim/undodir          " Configure where undo files are stored
-endif
 ]]
 
 --------------------
@@ -279,10 +201,11 @@ endif
 vim.cmd('colorscheme monokai')
 vim.cmd('syntax on')
 
---------------------------------
+---------------------------
 -- LUA configuration setup
---------------------------------
+---------------------------
+require('coc')
 require('coding')
 require('coding_markdown')
 require('mappings')
-
+require('options')

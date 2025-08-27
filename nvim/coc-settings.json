@@ -1,4 +1,6 @@
 {
+  "Lua.diagnostics.globals": ["vim"],
+
   // Code lens settings
   "codeLens.enable": true,
   "codeLens.display": true,
@@ -23,7 +25,7 @@
   "diagnostic.errorSign": "💥",
   "diagnostic.infoSign": "❔",
   "diagnostic.warningSign": "⚠️",
-  "eslint.autoFixOnSave": true,
+  "eslint.codeActionsOnSave.mode": "all",
   "hover.floatConfig": {
     "border": true,
     "rounded": true,

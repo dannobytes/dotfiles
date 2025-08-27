@@ -154,7 +154,8 @@ If the user requests only part of the structure, respond accordingly.]],
             {
               {
                 role = "user",
-                content = "Generate a Python class for managing a book library with methods for adding, removing, and searching books",
+                content =
+                "Generate a Python class for managing a book library with methods for adding, removing, and searching books",
                 opts = {
                   auto_submit = false,
                 },
@@ -454,9 +455,9 @@ If the user requests only part of the structure, respond accordingly.]],
     lazy = true,
     dependencies = {
       "theHamsta/nvim-dap-virtual-text", -- help to find variable definitions in debug mode
-      "rcarriga/nvim-dap-ui", -- Nice UI for nvim-dap
-      "suketa/nvim-dap-ruby", -- Debug Ruby
-      "mfussenegger/nvim-dap-python", -- Debug Python
+      "rcarriga/nvim-dap-ui",            -- Nice UI for nvim-dap
+      "suketa/nvim-dap-ruby",            -- Debug Ruby
+      "mfussenegger/nvim-dap-python",    -- Debug Python
     },
     keys = {
       {
@@ -464,7 +465,7 @@ If the user requests only part of the structure, respond accordingly.]],
         "<cmd>lua require('dap').toggle_breakpoint()<CR>",
         desc = "Debug: Set breakpoint",
       },
-      { "<F2>", "<cmd>lua require('dap').continue()<CR>", desc = "Debug: Continue" },
+      { "<F2>", "<cmd>lua require('dap').continue()<CR>",  desc = "Debug: Continue" },
       { "<F3>", "<cmd>lua require('dap').step_into()<CR>", desc = "Debug: Step into" },
       { "<F4>", "<cmd>lua require('dap').step_over()<CR>", desc = "Debug: Step over" },
       {
