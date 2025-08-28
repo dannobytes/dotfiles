@@ -12,7 +12,7 @@ require("fzf-lua").setup {
     -- Only valid when using a float window
     -- (i.e. when 'split' is not defined, default)
     height     = 0.9,  -- window height
-    width      = 0.85, -- window width
+    width      = 0.9,  -- window width
     row        = 0.35, -- window row position (0=top, 1=bottom)
     col        = 0.50, -- window col position (0=left, 1=right)
     -- border argument passthrough to nvim_open_win()
@@ -132,11 +132,11 @@ require("fzf-lua").setup {
 -----------------
 vim.keymap.set('n', '<c-p>', ':FzfLua files<cr>', { noremap = true, silent = true })
 vim.keymap.set('n', '<c-t>', ':FzfLua buffers<cr>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>B', ':FzfLua git_bcommits<cr>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>L', ':FzfLua git_blame<cr>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>C', ':FzfLua git_commits<cr>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>H', ':FzfLua oldfiles<cr>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>?', ':FzfLua git_files<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gb', ':FzfLua git_bcommits<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gl', ':FzfLua git_blame<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gc', ':FzfLua git_commits<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gh', ':FzfLua oldfiles<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gs', ':FzfLua git_status<cr>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>@', ':FzfLua<cr>', { noremap = true, silent = true })
 
 -- Create shortcut command to perform a custom :Rg search based on input.

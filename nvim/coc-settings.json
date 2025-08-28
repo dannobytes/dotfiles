@@ -2,19 +2,27 @@
   "Lua.diagnostics.globals": ["vim"],
 
   // Code lens settings
-  "codeLens.enable": true,
+  "codeLens.enable": false,
   "codeLens.display": true,
   "codeLens.position": "eol",
   "typescript.referencesCodeLens.enabled": true,
   "typescript.implementationsCodeLens.enabled": false,
 
   // Formatting
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
+  "eslint.autoFixOnSave": true,
+  "eslint.codeActionsOnSave.mode": "all",
   "prettier.tabWidth": 2,
   "prettier.enable": true,
   "prettier.singleQuote": true,
   "prettier.useTabs": false,
   "prettier.printWidth": 80,
   "prettier.semi": true,
+
+  // General
   "coc.preferences.formatOnSave": true,
   "coc.preferences.formatOnType": false,
   "diagnostic.floatConfig": {
@@ -25,16 +33,11 @@
   "diagnostic.errorSign": "💥",
   "diagnostic.infoSign": "❔",
   "diagnostic.warningSign": "⚠️",
-  "eslint.codeActionsOnSave.mode": "all",
   "hover.floatConfig": {
     "border": true,
     "rounded": true,
     "title": " ℹ"
   },
-  "stylelintplus.autoFixOnFormat": true,
-  "stylelintplus.autoFixOnSave": true,
-  "stylelintplus.enable": true,
-  "stylelintplus.validateOnSave": true,
   "suggest.floatConfig": {
     "border": true,
     "rounded": true
@@ -45,12 +48,17 @@
   "suggest.removeDuplicateItems": true,
   "suggest.triggerAfterInsertEnter": true,
 
-  // To make stylelint supposedly work better.
+  // Stylelint settings
+  "stylelintplus.autoFixOnFormat": true,
+  "stylelintplus.autoFixOnSave": true,
+  "stylelintplus.enable": true,
+  "stylelintplus.validateOnSave": true,
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
 
   // Use local TS version instead of deafult.
   "tsserver.useLocalTsdk": true,
-  "tsserver.tsdk": "${workspaceFolder}/node_modules/typescript/lib"
+  "tsserver.tsdk": "${workspaceFolder}/node_modules/typescript/lib",
+  "snippets.ultisnips.pythonPrompt": false
 }

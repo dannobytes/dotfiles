@@ -26,13 +26,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}   " LSP client
 Plug 'sheerun/vim-polyglot'       " Syntax highlighting for many languages
 Plug 'sjl/badwolf'
 Plug 'skwp/vim-html-escape'       " HTML entity escaping
+Plug 'nvim-lualine/lualine.nvim'  " Fancier status line
 Plug 'tomtom/tcomment_vim'        " Easy comments
 Plug 'tpope/vim-fugitive'         " Git integration
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rhubarb'          " Enables :GBrowse
 Plug 'tpope/vim-surround'         " Matching surround pairs
-Plug 'vim-airline/vim-airline'        " Status line
-Plug 'vim-airline/vim-airline-themes' " Status line themes
 Plug 'github/copilot.vim'         " GitHub Copilot
 " CodeCompanion Plugins
 Plug 'MeanderingProgrammer/render-markdown.nvim'
@@ -49,24 +48,6 @@ call plug#end()
 " Python provider config
 " -----------------------
 let g:python3_host_prog = '/usr/bin/python3'
-
-" Prevent missing cursor after :CocList
-let g:coc_disable_transparent_cursor = 1
-
-" --------------------
-" Configure airline status/tabline
-" --------------------
-let g:airline_powerline_fonts = 1
-let g:airline_section_b = airline#section#create(['hunks'])
-let g:airline_section_y = airline#section#create([])
-let g:airline_theme = 'molokai'
-let g:airline#extensions#coc#show_coc_status = 0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#tab_min_count = 2
 
 " --------------------
 " Configure editorconfig plugin to work well with fugitive.
@@ -202,3 +183,4 @@ require('coding_markdown')
 require('fzf')
 require('mappings')
 require('options')
+require('statusline')
