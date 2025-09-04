@@ -44,6 +44,3 @@ end, {
   nargs = 0,
 })
 vim.keymap.set('n', '<c-n>', ':ToggleNumber<cr>', { noremap = true, silent = true })
-
--- Count number of matches for the word under the cursor
-vim.keymap.set('n', ',*', '*<c-o>:%s///gn<cr>')

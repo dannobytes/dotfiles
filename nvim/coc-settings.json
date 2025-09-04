@@ -10,11 +10,9 @@
 
   // Formatting
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.organizeImports": true
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
   },
-  "eslint.autoFixOnSave": true,
-  "eslint.codeActionsOnSave.mode": "all",
   "prettier.tabWidth": 2,
   "prettier.enable": true,
   "prettier.singleQuote": true,

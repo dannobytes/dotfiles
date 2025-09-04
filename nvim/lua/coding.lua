@@ -18,9 +18,46 @@ require("codecompanion").setup({
       end,
     }
   },
+  display = {
+    chat = {
+      start_in_insert_mode = true, -- Open the chat buffer in insert mode?
+    },
+  },
   strategies = {
     chat = {
       adapter = "anthropic",
+      keymaps = {
+        send = {
+          modes = {
+            i = { "<C-cr>", "<C-s>" },
+          },
+        },
+        close = {
+          modes = { n = "<C-c>", i = "<C-c>" },
+          opts = {},
+        },
+      },
+      opts = {
+        completion_provider = "coc", -- blink|cmp|coc|default
+      },
+      slash_commands = {
+        ["buffer"] = {
+          keymaps = {
+            modes = {
+              i = "<C-t>",
+              n = { "<C-t>" },
+            },
+          },
+        },
+        ["file"] = {
+          keymaps = {
+            modes = {
+              i = "<C-p>",
+              n = { "<C-p>" },
+            },
+          },
+        },
+      },
     },
     inline = {
       adapter = "anthropic",

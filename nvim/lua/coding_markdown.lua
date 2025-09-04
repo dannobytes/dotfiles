@@ -139,7 +139,7 @@ require('render-markdown').setup({
     -- Settings for coq_nvim completions source
     coq = { enabled = false },
     -- Settings for in-process language server completions
-    lsp = { enabled = false },
+    lsp = { enabled = true },
     filter = {
       callout = function()
         -- example to exclude obsidian callouts
@@ -170,8 +170,7 @@ require('render-markdown').setup({
     -- Output is evaluated depending on the type.
     -- | function | `value(context)`              |
     -- | string[] | `cycle(value, context.level)` |
-    icons = {},
-    -- icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
+    icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
     -- Determines how icons fill the available space.
     -- | right   | '#'s are concealed and icon is appended to right side                      |
     -- | inline  | '#'s are concealed and icon is inlined on left side                        |
@@ -213,12 +212,12 @@ require('render-markdown').setup({
     -- Highlight for the heading icon and extends through the entire line.
     -- Output is evaluated by `clamp(value, context.level)`.
     backgrounds = {
-      -- 'RenderMarkdownH1Bg',
-      -- 'RenderMarkdownH2Bg',
-      -- 'RenderMarkdownH3Bg',
-      -- 'RenderMarkdownH4Bg',
-      -- 'RenderMarkdownH5Bg',
-      -- 'RenderMarkdownH6Bg',
+      'RenderMarkdownH1Bg',
+      'RenderMarkdownH2Bg',
+      'RenderMarkdownH3Bg',
+      'RenderMarkdownH4Bg',
+      'RenderMarkdownH5Bg',
+      'RenderMarkdownH6Bg',
     },
     -- Highlight for the heading and sign icons.
     -- Output is evaluated using the same logic as 'backgrounds'.

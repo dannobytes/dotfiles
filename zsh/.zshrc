@@ -201,6 +201,10 @@ export GPG_TTY=$(tty)
 # Tell FZF to use ripgrep
 export FZF_DEFAULT_COMMAND='rg --glob "!{.git}/*" --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
 
+# Default FZF options
+export FZF_DEFAULT_OPTS='--layout=reverse --info=inline --height=90% --border --style=default'
+export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS --preview \"bat --number --style=numbers --color=always --line-range :200 {}\" --preview-window=\"right:50%:nowrap\""
+
 # ==============================
 # BAT config
 # https://github.com/sharkdp/bat

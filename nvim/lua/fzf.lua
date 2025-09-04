@@ -11,29 +11,24 @@ require("fzf-lua").setup {
     -- "aboveleft vnew   : split left
     -- Only valid when using a float window
     -- (i.e. when 'split' is not defined, default)
-    height     = 0.9,  -- window height
-    width      = 0.9,  -- window width
-    row        = 0.35, -- window row position (0=top, 1=bottom)
+    height     = 0.85, -- window height
+    width      = 0.90, -- window width
+    row        = 0.40, -- window row position (0=top, 1=bottom)
     col        = 0.50, -- window col position (0=left, 1=right)
     -- border argument passthrough to nvim_open_win()
     border     = "rounded",
     -- Backdrop opacity, 0 is fully opaque, 100 is fully transparent (i.e. disabled)
     backdrop   = 60,
-    -- title         = "Title",
-    -- title_pos     = "center",        -- 'left', 'center' or 'right'
-    -- title_flags   = false,           -- uncomment to disable title flags
     fullscreen = false, -- start fullscreen?
     -- enable treesitter highlighting for the main fzf window will only have
     -- effect where grep like results are present, i.e. "file:line:col:text"
     -- due to highlight color collisions will also override `fzf_colors`
     -- set `fzf_colors=false` or `fzf_colors.hl=...` to override
     treesitter = {
-      enabled    = true,
-      fzf_colors = { ["hl"] = "-1:reverse", ["hl+"] = "-1:reverse" }
+      enabled = true,
     },
     preview    = {
-      -- default     = 'bat',           -- override the default previewer?
-      -- default uses the 'builtin' previewer
+      -- default      = 'bat',     -- override the default previewer?
       border       = "rounded", -- preview border: accepts both `nvim_open_win`
       -- and fzf values (e.g. "border-top", "none")
       -- native fzf previewers (bat/cat/git/etc)
@@ -41,7 +36,7 @@ require("fzf-lua").setup {
       wrap         = false,       -- preview line wrap (fzf's 'wrap|nowrap')
       hidden       = false,       -- start preview hidden
       vertical     = "down:45%",  -- up|down:size
-      horizontal   = "right:60%", -- right|left:size
+      horizontal   = "right:55%", -- right|left:size
       layout       = "flex",      -- horizontal|vertical|flex
       flip_columns = 100,         -- #cols to switch to horizontal on flex
       -- Only used with the builtin previewer:
@@ -101,7 +96,7 @@ require("fzf-lua").setup {
     },
     fzf = {
       -- fzf '--bind=' options
-      -- true,        -- uncomment to inherit all the below in your custom config
+      true, -- uncomment to inherit all the below in your custom config
       ["ctrl-z"]     = "abort",
       ["ctrl-u"]     = "unix-line-discard",
       ["ctrl-f"]     = "half-page-down",
@@ -118,13 +113,9 @@ require("fzf-lua").setup {
       ["shift-up"]   = "preview-page-up",
     },
   },
-  -- actions = { ... },  -- Fzf "accept" binds
-  -- fzf_opts = { ... }, -- Fzf CLI flags
-  -- fzf_colors = { ...  },  -- Fzf `--color` specification
-  -- hls = { ...  },         -- Highlights
-  -- previewers = { ...  },  -- Previewers options
-  -- SPECIFIC COMMAND/PICKER OPTIONS, SEE BELOW
-  -- files = { ... },
+  -- Set to `true` to automatically generate an fzf's colorscheme from
+  -- Neovim's current colorscheme:
+  fzf_colors = true
 }
 
 -----------------
@@ -149,6 +140,7 @@ end, {
   desc = 'Perform a custom Rg search based on user input',
   nargs = 0,
 })
+vim.keymap.set('n', '<leader><c-\\>', ':FzfLua grep<cr>', { noremap = true, silent = true })
 vim.keymap.set('n', '<c-\\>', ':FzfLua live_grep<cr>', { noremap = true, silent = true })
 
 -- Open up fuzzy search one directory above to fuzzy search in an adjacent path

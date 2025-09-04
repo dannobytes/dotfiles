@@ -56,10 +56,6 @@ vim.keymap.set('n', 'K', ShowDocumentation, { silent = true })
 -- Symbol renaming.
 vim.keymap.set('n', '<leader>rn', '<Plug>(coc-rename)')
 
--- Formatting selected code.
--- vim.keymap.set('x', '<leader>f', '<Plug>(coc-format-selected)', { desc = 'Format selected' })
--- vim.keymap.set('n', '<leader>f', '<Plug>(coc-format-selected)', { desc = 'Format selected' })
-
 -- Remap keys for applying codeAction to the current buffer.
 vim.keymap.set('n', '<leader>ac', '<Plug>(coc-codeaction-cursor)')
 -- Remap keys for apply code actions affect whole buffer

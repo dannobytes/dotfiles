@@ -47,3 +47,12 @@ vim.opt.undofile = true   -- Persistent undo, even after closing vim
 vim.opt.updatetime = 300
 vim.opt.visualbell = true -- Set visual bell instead of a 'BEEP'
 vim.opt.wrap = true       -- wrap lines longer than the window width
+
+-- Enables 24-bit RGB color in the TUI only when tmux is detected.
+-- Otherwise, it is disabled since native mac terminal does not support it.
+local term = os.getenv('TERM')
+if term and string.find(term, 'tmux') then
+  vim.opt.termguicolors = true
+else
+  vim.opt.termguicolors = false
+end
