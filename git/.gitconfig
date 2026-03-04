@@ -95,7 +95,3 @@
   showStat = true
 [status]
   showStash = false
-[user]
-  name = Daniels Lee
-  email = dannlee@gmail.com
-  signingkey = FAECB9972FA2A032
