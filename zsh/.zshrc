@@ -108,6 +108,9 @@ fi
 # ===================================================================
 # -------------------------------------------------------------------
 
+# Add ~/.local/bin to PATH for user-installed binaries
+export PATH="$HOME/.local/bin:$PATH"
+
 # ==============================
 # Homebrew installation
 # ==============================
@@ -199,10 +202,11 @@ export GPG_TTY=$(tty)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && source <(fzf --zsh)
 
 # Tell FZF to use ripgrep
+# https://github.com/junegunn/fzf?tab=readme-ov-file#environment-variables
 export FZF_DEFAULT_COMMAND='rg --glob "!{.git}/*" --files-with-matches --follow --smart-case --threads 4 --hidden --regexp ""'
 
 # Default FZF options
-export FZF_DEFAULT_OPTS='--layout=reverse --info=inline --height=90% --border --style=default'
+export FZF_DEFAULT_OPTS='--layout=reverse --info=inline --height=90% --border --style=full'
 export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS --preview \"bat --number --style=numbers --color=always --line-range :200 {}\" --preview-window=\"right:50%:nowrap\""
 
 # ==============================
@@ -241,3 +245,10 @@ eval "$(pyenv init -)"
 # n config
 # ==============================
 export N_PRESERVE_NPM=0
+
+# ==============================
+# ngrok shell integration
+# ==============================
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi

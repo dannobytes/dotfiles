@@ -1,5 +1,4 @@
--- Shortcut to sort all lines within the current curly block
-vim.keymap.set('n', '<leader>sor', 'vi{:sor<cr><c-o>')
+-- Shortcut to sort all lines within the current curly block vim.keymap.set('n', '<leader>sor', 'vi{:sor<cr><c-o>')
 
 -- Shortcuts to edit or source my .vimrc file
 vim.keymap.set('n', '<leader>vrc', ':edit $MYVIMRC<cr>')

@@ -2,6 +2,30 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+---------------------------
+-- LUA configuration setup
+---------------------------
+require("config.lazy")
+require('config.options')
+require('config.keymaps')
+require('config.autocmds')
+
+-- Enable syntax highlighting in markdown code blocks for the following languages
+vim.g.markdown_fenced_languages = {
+  'bash=sh',
+  'css',
+  'html',
+  'javascript',
+  'json',
+  'lua',
+  'python',
+  'scss',
+  'typescript',
+  'typescriptreact',
+  'vim',
+  'yaml',
+}
+
 vim.cmd [[
 " Automatic installation for vim-plug
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
@@ -15,33 +39,34 @@ endif
 " Plugins
 " --------------------
 call plug#begin('~/.vim/plugged')
-Plug 'airblade/vim-gitgutter'     " Git gutter integration
-Plug 'ap/vim-css-color'           " CSS color previews
-Plug 'crusoexia/vim-monokai'      " Colors
-Plug 'editorconfig/editorconfig-vim'
-Plug 'github/copilot.vim'         " GitHub Copilot
-Plug 'ibhagwan/fzf-lua'           " Fuzzy finder written in Lua
-Plug 'iloginow/vim-stylus'        " Stylus syntax
-Plug 'moll/vim-node'              " Open files via ESM
-Plug 'neoclide/coc.nvim', {'branch': 'release'}   " LSP client
-Plug 'nvim-lualine/lualine.nvim'  " Fancier status line
-Plug 'sheerun/vim-polyglot'       " Syntax highlighting for many languages
-Plug 'skwp/vim-html-escape'       " HTML entity escaping
-Plug 'tomtom/tcomment_vim'        " Easy comments
-Plug 'tpope/vim-fugitive'         " Git integration
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-rhubarb'          " Enables :GBrowse
-Plug 'tpope/vim-surround'         " Matching surround pairs
+" Plug 'airblade/vim-gitgutter'     " Git gutter integration
+" Plug 'ap/vim-css-color'           " CSS color previews
+" Plug 'crusoexia/vim-monokai'      " Colors
+" Plug 'editorconfig/editorconfig-vim'
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf.vim'
+" Plug 'github/copilot.vim'         " GitHub Copilot
+" Plug 'ibhagwan/fzf-lua'           " Fuzzy finder written in Lua
+" Plug 'iloginow/vim-stylus'        " Stylus syntax
+" Plug 'moll/vim-node'              " Open files via ESM
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}   " LSP client
+" Plug 'nvim-lualine/lualine.nvim'  " Fancier status line
+" Plug 'sheerun/vim-polyglot'       " Syntax highlighting for many languages
+" Plug 'skwp/vim-html-escape'       " HTML entity escaping
+" Plug 'tomtom/tcomment_vim'        " Easy comments
+" Plug 'tpope/vim-fugitive'         " Git integration
+" Plug 'tpope/vim-rhubarb'          " Enables :GBrowse
+" Plug 'tpope/vim-surround'         " Matching surround pairs
 " CodeCompanion Plugins
-Plug 'MeanderingProgrammer/render-markdown.nvim'
-Plug 'echasnovski/mini.nvim'
-Plug 'nvim-tree/nvim-web-devicons'
+" Plug 'MeanderingProgrammer/render-markdown.nvim'
+" Plug 'echasnovski/mini.nvim'
+" Plug 'nvim-tree/nvim-web-devicons'
 " CodeCompanion Insallation Instructions
 " https://codecompanion.olimorris.dev/installation.html#vim-plug
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'olimorris/codecompanion.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'nvim-treesitter/nvim-treesitter-context'
+" Plug 'olimorris/codecompanion.nvim'
 call plug#end()
 
 " -----------------------
@@ -55,92 +80,12 @@ let g:python3_host_prog = '/usr/bin/python3'
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " --------------------
-" Configure git gutter settings
-" --------------------
-let g:gitgutter_diff_relative_to = 'index'
-
-" --------------------
 " Configure netrw directory view
 " --------------------
 let g:netrw_keepdir = 1
 let g:netrw_liststyle = 0
 let g:netrw_sort_by = "name"
 let g:netrw_winsize = 30
-
-" --------------------
-" Auto commands
-" --------------------
-if has("autocmd")
-  " Apply custom color overrides whenever color scheme changes
-  function! CustomHighlights()
-    highlight DiagnosticError ctermfg=210
-    highlight DiagnosticWarn ctermfg=215
-    highlight DiagnosticInfo ctermfg=157
-    highlight DiagnosticHint ctermfg=159
-
-    " CoC colors
-    highlight CocFloating ctermfg=189 ctermbg=235
-    highlight CocFloatActive ctermfg=209
-    highlight CocFloatDividingLine ctermfg=245
-    highlight! link CocErrorFloat DiagnosticError
-    highlight! link CocWarningFloat DiagnosticWarn
-    highlight! link CocInfoFloat DiagnosticInfo
-    highlight! link CocHintFloat DiagnosticHint
-    highlight CocErrorHighlight ctermfg=204 cterm=none
-    highlight CocWarningHighlight ctermfg=209
-    highlight CocInfoHighlight ctermfg=186
-    highlight CocHintHighlight ctermfg=115
-    highlight CocPumSearch ctermfg=208
-    highlight CocNotificationProgress ctermfg=208
-    highlight CocHighlightText ctermbg=58
-
-    highlight Visual ctermbg=54 ctermfg=7
-    highlight Search ctermbg=183
-    highlight GitGutterDelete guifg=#ff5f87 ctermfg=204
-    highlight link netrwMarkFile Search
-  endfunc
-  augroup customHighlights
-    autocmd!
-    autocmd ColorScheme * call CustomHighlights()
-  augroup END
-
-  augroup editing
-    " remove trailing white spaces
-    autocmd!
-    autocmd BufWritePre * %s/\s\+$//e
-  augroup END
-
-  " Apply file types to extensions not recognized.
-  augroup fileTypes
-    autocmd!
-    autocmd BufRead,BufNewFile *.coffee set filetype=coffee
-    autocmd BufRead,BufNewFile *.hamlc set filetype=haml
-    autocmd BufRead,BufNewFile *.md set shiftwidth=2
-    autocmd BufRead,BufNewFile *.pug set filetype=pug
-    autocmd BufRead,BufNewFile .eslintignore set filetype=gitignore
-    autocmd BufRead,BufNewFile .stylelintignore set filetype=gitignore
-  augroup END
-
-  " Extend my own custom format options to specific file types.
-  augroup formatOptions
-    autocmd!
-    autocmd BufEnter *.scss setlocal formatoptions=roql
-    autocmd BufEnter *.md setlocal formatoptions-=t
-    autocmd BufEnter * setlocal formatoptions+=wj
-    autocmd BufEnter * setlocal formatoptions-=c
-  augroup END
-
-  augroup cocTweaks
-    autocmd FileType css setl iskeyword+=-
-    autocmd FileType scss setlocal iskeyword+=@-@
-  augroup END
-
-  " Make `gf` work within files that have trouble with it.
-  augroup gotoFile
-    autocmd!
-    autocmd BufEnter *.scss setlocal includeexpr=substitute(v:fname,'^\\~*','node_modules/','')
-  augroup END
-endif
 
 " --------------------------------------
 " Use RipGrep as my default grep search.
@@ -161,42 +106,5 @@ if executable('rg')
 
   " Type `\` to initiate grep search across all files in a quickfix window.
   nnoremap \ :Search<CR>
-
-  " Shortcut to grep search the word under the cursor in normal/visual mode.
-  nnoremap \\ "ayiw :Search<CR><C-r>a<CR>
-  vnoremap \\ "ay :Search<CR>'<C-r>a'<CR>
 endif
 ]]
-
---------------------
--- General options
---------------------
-vim.cmd('colorscheme monokai')
-
----------------------------
--- LUA configuration setup
----------------------------
-require('coc')
-require('coding')
-require('coding_markdown')
-require('copilot')
-require('fzf')
-require('mappings')
-require('options')
-require('statusline')
-
-require('treesitter-context').setup {
-  enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
-  multiwindow = false,      -- Enable multiwindow support.
-  max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
-  min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-  line_numbers = true,
-  multiline_threshold = 20, -- Maximum number of lines to show for a single context
-  trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-  mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
-  -- Separator between context and content. Should be a single character string, like '-'.
-  -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-  separator = nil,
-  zindex = 20,     -- The Z-index of the context window
-  on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-}

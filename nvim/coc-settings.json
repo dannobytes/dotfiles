@@ -1,5 +1,5 @@
 {
-  "Lua.diagnostics.globals": ["vim"],
+  "Lua.diagnostics.globals": ["FzfLua", "vim"],
 
   // Code lens settings
   "codeLens.enable": false,
@@ -58,5 +58,6 @@
   // Use local TS version instead of deafult.
   "tsserver.useLocalTsdk": true,
   "tsserver.tsdk": "${workspaceFolder}/node_modules/typescript/lib",
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "extensions.updateCheck": "daily"
 }
