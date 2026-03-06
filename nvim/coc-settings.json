@@ -1,5 +1,10 @@
 {
-  "Lua.diagnostics.globals": ["FzfLua", "vim"],
+  "Lua.diagnostics.globals": ["FzfLua", "Snacks", "vim"],
+  "Lua.format.enable": true,
+  "Lua.format.defaultConfig": {
+    "indent_style": "space",
+    "indent_size": "2"
+  },
 
   // Code lens settings
   "codeLens.enable": false,

@@ -108,6 +108,11 @@ fi
 # ===================================================================
 # -------------------------------------------------------------------
 
+# Ghostty shell integration for Bash. This should be at the top of your bashrc!
+if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+  builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+fi
+
 # Add ~/.local/bin to PATH for user-installed binaries
 export PATH="$HOME/.local/bin:$PATH"
 
