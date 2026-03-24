@@ -1,3 +1,4 @@
+
 # This is the configuration file for Ghostty.
 #
 # This template file has been automatically created at the following
@@ -47,14 +48,18 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
+app-notifications = true
 auto-update = download
 background = #1a1a1f
+confirm-close-surface = false
 cursor-color = plum1
 cursor-opacity = 0.8
 cursor-text = black
+desktop-notifications = true
 font-family = "lilex nerd font"
 font-size = 13
 font-thicken = true
-window-width = 280
+keybind = cmd+period=text:\x03
+macos-icon = chalkboard
 window-height = 100
-confirm-close-surface = false
+window-width = 280
