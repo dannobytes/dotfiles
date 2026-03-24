@@ -26,9 +26,6 @@ return {
   { 'tomtom/tcomment_vim' },  -- Easy comments
   { 'skwp/vim-html-escape' }, -- HTML entity escaping
 
-  -- LSP
-  { 'neovim/nvim-lspconfig' }, -- LSP configurations
-
   -- Language support
   { 'sheerun/vim-polyglot' }, -- Syntax highlighting for many languages
   { 'iloginow/vim-stylus' },  -- Stylus syntax

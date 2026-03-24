@@ -22,7 +22,7 @@ return {
         --     { "<leader>gs",    "<cmd>FzfLua git_status<cr>",            desc = "Git status" },
         -- },
         config = function()
-            local FzfLua = require("fzf-lua").setup({
+            require("fzf-lua").setup({
                 -- MISC GLOBAL SETUP OPTIONS, SEE BELOW
                 -- fzf_bin = ...,
                 -- each of these options can also be passed as function that return options table
@@ -74,15 +74,17 @@ return {
                         delay        = 20, -- delay(ms) displaying the preview
                         -- prevents lag on fast scrolling
                         winopts      = {   -- builtin previewer window options
-                            number         = true,
-                            relativenumber = false,
+                            cursorcolumn   = false,
                             cursorline     = true,
                             cursorlineopt  = "both",
-                            cursorcolumn   = false,
-                            signcolumn     = "no",
-                            list           = false,
                             foldenable     = false,
                             foldmethod     = "manual",
+                            list           = false,
+                            number         = true,
+                            relativenumber = false,
+                            scrolloff      = 0, -- float scrolloff, only applies when scrollbar = 'float'
+                            signcolumn     = "no",
+                            winblend       = 0, -- builtin previewer transparency (0-100)
                         },
                     },
                     on_create  = function()
