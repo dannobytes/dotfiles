@@ -69,7 +69,7 @@ return {
         -- Code actions and refactoring
         { '<leader>rn', '<Plug>(coc-rename)',            mode = 'n', desc = 'Rename symbol' },
         { '<leader>ac', '<Plug>(coc-codeaction-cursor)', mode = 'n', desc = 'Code action (cursor)' },
-        { '<leader>as', '<Plug>(coc-codeaction-source)', mode = 'n', desc = 'Code action (source)' },
+        -- { '<leader>as', '<Plug>(coc-codeaction-source)', mode = 'n', desc = 'Code action (source)' },
         { '<leader>qf', '<Plug>(coc-fix-current)',       mode = 'n', desc = 'Quick fix current line' },
 
         -- Float window scrolling

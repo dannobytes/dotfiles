@@ -26,13 +26,22 @@ return {
   { 'tomtom/tcomment_vim' },  -- Easy comments
   { 'skwp/vim-html-escape' }, -- HTML entity escaping
 
+  -- LSP
+  { 'neovim/nvim-lspconfig' }, -- LSP configurations
+
   -- Language support
   { 'sheerun/vim-polyglot' }, -- Syntax highlighting for many languages
   { 'iloginow/vim-stylus' },  -- Stylus syntax
   { 'moll/vim-node' },        -- Open files via ESM
 
   -- AI assistance
-  { 'github/copilot.vim' }, -- GitHub Copilot
+  {
+    'github/copilot.vim',
+    lazy = false,
+    keys = {
+      { "<c-l>", "<Plug>(copilot-accept-word)", mode = "i", desc = "Accept next Copilot suggestion word" },
+    }
+  }, -- GitHub Copilot
 
   -- CodeCompanion dependencies
   { 'echasnovski/mini.nvim' },

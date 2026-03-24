@@ -64,7 +64,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = file_types_group,
-  pattern = "*.pug",
+  pattern = "*.{pug,jade}",
   command = "set filetype=pug",
 })
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {

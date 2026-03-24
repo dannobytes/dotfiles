@@ -1,26 +1,26 @@
 return {
     {
         'ibhagwan/fzf-lua',
-        keys = {
-            -- { "<leader>ff",    "<cmd>FzfLua<cr>",                       desc = "Commands" },
-            -- { "<leader>fk",    "<cmd>FzfLua keymaps<cr>",               desc = "Keymaps" },
-            -- { "<leader>fh",    "<cmd>FzfLua history<cr>",               desc = "History" },
-            -- { "<leader>fm",    "<cmd>FzfLua marks<cr>",                 desc = "Marks" },
-            --
-            -- { "<c-p>",         "<cmd>FzfLua files<cr>",                 desc = "Find files" },
-            -- { "<leader><c-p>", "<cmd>FzfLua oldfiles<cr>",              desc = "Recent files" },
-            -- { "<c-t>",         "<cmd>FzfLua buffers<cr>",               desc = "Find buffers" },
-            --
-            -- { "<c-\\>",        "<cmd>FzfLua live_grep resume=true<cr>", desc = "Live grep" },
-            -- { "\\\\",          "<cmd>FzfLua grep_cword<cr>",            desc = "Grep word under cursor" },
-            -- { "<leader>fs",    "<cmd>FzfLua grep_string<cr>",           desc = "Grep string under cursor" },
-            -- { "<leader>f/",    "<cmd>FzfLua search_history<cr>",        desc = "Search history" },
-            --
-            -- { "<leader>gb",    "<cmd>FzfLua git_bcommits<cr>",          desc = "Git buffer commits" },
-            -- { "<leader>gc",    "<cmd>FzfLua git_commits<cr>",           desc = "Git commits" },
-            -- { "<leader>gl",    "<cmd>FzfLua git_blame<cr>",             desc = "Git blame" },
-            -- { "<leader>gs",    "<cmd>FzfLua git_status<cr>",            desc = "Git status" },
-        },
+        -- keys = {
+        --     { "<leader>ff",    "<cmd>FzfLua<cr>",                       desc = "Commands" },
+        --     { "<leader>fk",    "<cmd>FzfLua keymaps<cr>",               desc = "Keymaps" },
+        --     { "<leader>fh",    "<cmd>FzfLua history<cr>",               desc = "History" },
+        --     { "<leader>fm",    "<cmd>FzfLua marks<cr>",                 desc = "Marks" },
+        --
+        --     { "<c-p>",         "<cmd>FzfLua files<cr>",                 desc = "Find files" },
+        --     { "<leader><c-p>", "<cmd>FzfLua oldfiles<cr>",              desc = "Recent files" },
+        --     { "<c-t>",         "<cmd>FzfLua buffers<cr>",               desc = "Find buffers" },
+        --
+        --     { "<c-\\>",        "<cmd>FzfLua live_grep resume=true<cr>", desc = "Live grep" },
+        --     { "\\\\",          "<cmd>FzfLua grep_cword<cr>",            desc = "Grep word under cursor" },
+        --     { "<leader>fs",    "<cmd>FzfLua grep_string<cr>",           desc = "Grep string under cursor" },
+        --     { "<leader>f/",    "<cmd>FzfLua search_history<cr>",        desc = "Search history" },
+        --
+        --     { "<leader>gb",    "<cmd>FzfLua git_bcommits<cr>",          desc = "Git buffer commits" },
+        --     { "<leader>gc",    "<cmd>FzfLua git_commits<cr>",           desc = "Git commits" },
+        --     { "<leader>gl",    "<cmd>FzfLua git_blame<cr>",             desc = "Git blame" },
+        --     { "<leader>gs",    "<cmd>FzfLua git_status<cr>",            desc = "Git status" },
+        -- },
         config = function()
             local FzfLua = require("fzf-lua").setup({
                 -- MISC GLOBAL SETUP OPTIONS, SEE BELOW
@@ -172,8 +172,8 @@ return {
             'junegunn/fzf.vim',
         },
         keys = {
-            -- { "<leader>gc", "<cmd>Commits<cr>",  desc = "Git commits" },
-            -- { "<leader>gb", "<cmd>BCommits<cr>", desc = "Git buffer commits" },
+            { "<leader>gc", "<cmd>Commits<cr>",  desc = "Git commits" },
+            { "<leader>gb", "<cmd>BCommits<cr>", desc = "Git buffer commits" },
         },
     }
 }
