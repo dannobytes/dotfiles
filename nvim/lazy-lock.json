@@ -1,7 +1,7 @@
 {
   "claudecode.nvim": { "branch": "main", "commit": "432121f0f5b9bda041030d1e9e83b7ba3a93dd8f" },
   "coc.nvim": { "branch": "release", "commit": "fb74029fc12b16e714c245d1f265f3071d1ea07c" },
-  "codecompanion.nvim": { "branch": "main", "commit": "d17d4c7242254ae2d458e5ca600764febddd2e7b" },
+  "codecompanion.nvim": { "branch": "main", "commit": "4830417353a5430002403f6751b027a56b595863" },
   "conform.nvim": { "branch": "master", "commit": "086a40dc7ed8242c03be9f47fbcee68699cc2395" },
   "copilot.vim": { "branch": "release", "commit": "a12fd5672110c8aa7e3c8419e28c96943ca179be" },
   "editorconfig-vim": { "branch": "master", "commit": "c0227885a06b155d5aa5465e08b9800e8c939f70" },
