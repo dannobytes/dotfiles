@@ -1,28 +1,28 @@
 -- apply custom color overrides whenever color scheme changes
 local function custom_highlights()
   vim.api.nvim_set_hl(0, "diagnosticerror", { fg = "#ff8787" }) -- ctermfg 210
-  vim.api.nvim_set_hl(0, "diagnosticwarn", { fg = "#ffaf5f" })  -- ctermfg 215
-  vim.api.nvim_set_hl(0, "diagnosticinfo", { fg = "#afffaf" })  -- ctermfg 157
-  vim.api.nvim_set_hl(0, "diagnostichint", { fg = "#afffff" })  -- ctermfg 159
+  vim.api.nvim_set_hl(0, "diagnosticwarn", { fg = "#ffaf5f" }) -- ctermfg 215
+  vim.api.nvim_set_hl(0, "diagnosticinfo", { fg = "#afffaf" }) -- ctermfg 157
+  vim.api.nvim_set_hl(0, "diagnostichint", { fg = "#afffff" }) -- ctermfg 159
 
   -- coc colors
   vim.api.nvim_set_hl(0, "cocfloating", { fg = "#d7d7ff", bg = "#262626" }) -- ctermfg 189, ctermbg 235
-  vim.api.nvim_set_hl(0, "cocfloatactive", { fg = "#ff875f" })              -- ctermfg 209
-  vim.api.nvim_set_hl(0, "cocfloatdividingline", { fg = "#8a8a8a" })        -- ctermfg 245
+  vim.api.nvim_set_hl(0, "cocfloatactive", { fg = "#ff875f" }) -- ctermfg 209
+  vim.api.nvim_set_hl(0, "cocfloatdividingline", { fg = "#8a8a8a" }) -- ctermfg 245
   vim.api.nvim_set_hl(0, "CocErrorFloat", { link = "DiagnosticError" })
   vim.api.nvim_set_hl(0, "CocWarningFloat", { link = "DiagnosticWarn" })
   vim.api.nvim_set_hl(0, "cocinfofloat", { link = "diagnosticinfo" })
   vim.api.nvim_set_hl(0, "CocHintFloat", { link = "DiagnosticHint" })
-  vim.api.nvim_set_hl(0, "CocErrorHighlight", { fg = "#ff5f87" })       -- ctermfg 204
-  vim.api.nvim_set_hl(0, "CocWarningHighlight", { fg = "#ff875f" })     -- ctermfg 209
-  vim.api.nvim_set_hl(0, "CocInfoHighlight", { fg = "#d7d787" })        -- ctermfg 186
-  vim.api.nvim_set_hl(0, "CocHintHighlight", { fg = "#87d7af" })        -- ctermfg 115
-  vim.api.nvim_set_hl(0, "CocPumSearch", { fg = "#ff8700" })            -- ctermfg 208
+  vim.api.nvim_set_hl(0, "CocErrorHighlight", { fg = "#ff5f87" }) -- ctermfg 204
+  vim.api.nvim_set_hl(0, "CocWarningHighlight", { fg = "#ff875f" }) -- ctermfg 209
+  vim.api.nvim_set_hl(0, "CocInfoHighlight", { fg = "#d7d787" }) -- ctermfg 186
+  vim.api.nvim_set_hl(0, "CocHintHighlight", { fg = "#87d7af" }) -- ctermfg 115
+  vim.api.nvim_set_hl(0, "CocPumSearch", { fg = "#ff8700" }) -- ctermfg 208
   vim.api.nvim_set_hl(0, "CocNotificationProgress", { fg = "#ff8700" }) -- ctermfg 208
-  vim.api.nvim_set_hl(0, "CocHighlightText", { bg = "#5f5f00" })        -- ctermbg 58
+  vim.api.nvim_set_hl(0, "CocHighlightText", { bg = "#5f5f00" }) -- ctermbg 58
 
-  vim.api.nvim_set_hl(0, "Visual", { bg = "#18748a", fg = "#eeeeee" })  -- ctermbg 54, ctermfg 7
-  vim.api.nvim_set_hl(0, "Search", { bg = "#d7afdd", fg = "#000000" })  -- ctermbg 183
+  vim.api.nvim_set_hl(0, "Visual", { bg = "#18748a", fg = "#eeeeee" }) -- ctermbg 54, ctermfg 7
+  vim.api.nvim_set_hl(0, "Search", { bg = "#d7afdd", fg = "#000000" }) -- ctermbg 183
   vim.api.nvim_set_hl(0, "netrwMarkFile", { link = "Search" })
 
   -- Snacks picker
@@ -39,6 +39,12 @@ custom_highlights()
 
 -- Editing autogroup
 local editing_group = vim.api.nvim_create_augroup("editing", { clear = true })
+-- Briefly highlight yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = editing_group,
+  callback = function() vim.highlight.on_yank({ timeout = 200 }) end,
+})
+-- Strip trailing whitespace on save
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = editing_group,
   pattern = "*",
