@@ -54,7 +54,9 @@ return {
     config = function()
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
-        command = "LspOxlintFixAll",
+        callback = function()
+          if not pcall(vim.cmd, "LspOxlintFixAll") then pcall(vim.cmd, "LspEslintFixAll") end
+        end,
       })
 
       vim.api.nvim_create_autocmd("LspAttach", {
