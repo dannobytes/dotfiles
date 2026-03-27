@@ -1,5 +1,13 @@
 return {
   {
+    "github/copilot.vim",
+    lazy = false,
+    keys = {
+      { "<c-l>", "<Plug>(copilot-accept-word)", mode = "i", desc = "Accept next Copilot suggestion word" },
+    },
+  },
+
+  {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
     lazy = false,

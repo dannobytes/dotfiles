@@ -131,6 +131,12 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal iskeyword+=@-@",
 })
 
+-- Disable spell check for gitcommit buffers
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "gitcommit",
+  callback = function() vim.opt_local.spell = false end,
+})
+
 -- Goto file autogroup
 local goto_file_group = vim.api.nvim_create_augroup("gotoFile", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", {
