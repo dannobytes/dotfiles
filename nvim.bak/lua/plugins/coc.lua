@@ -47,10 +47,10 @@ return {
     { "]g", "<Plug>(coc-diagnostic-next)", mode = "n", silent = true, desc = "Next diagnostic" },
 
     -- Code navigation
-    { "gd", "<Plug>(coc-definition)", mode = "n", silent = true, desc = "Go to definition" },
+    { "gd", "<Plug>(coc-definition)",      mode = "n", silent = true, desc = "Go to definition" },
     { "gy", "<Plug>(coc-type-definition)", mode = "n", silent = true, desc = "Go to type definition" },
-    { "gi", "<Plug>(coc-implementation)", mode = "n", silent = true, desc = "Go to implementation" },
-    { "gr", "<Plug>(coc-references)", mode = "n", silent = true, desc = "Go to references" },
+    { "gi", "<Plug>(coc-implementation)",  mode = "n", silent = true, desc = "Go to implementation" },
+    { "gr", "<Plug>(coc-references)",      mode = "n", silent = true, desc = "Go to references" },
 
     -- Show documentation
     {
@@ -68,17 +68,15 @@ return {
     },
 
     -- Code actions and refactoring
-    { "<leader>rn", "<Plug>(coc-rename)", mode = "n", desc = "Rename symbol" },
+    { "<leader>rn", "<Plug>(coc-rename)",            mode = "n", desc = "Rename symbol" },
     { "<leader>ac", "<Plug>(coc-codeaction-cursor)", mode = "n", desc = "Code action (cursor)" },
     -- { '<leader>as', '<Plug>(coc-codeaction-source)', mode = 'n', desc = 'Code action (source)' },
-    { "<leader>qf", "<Plug>(coc-fix-current)", mode = "n", desc = "Quick fix current line" },
+    { "<leader>qf", "<Plug>(coc-fix-current)",       mode = "n", desc = "Quick fix current line" },
 
     -- Float window scrolling
     {
       "<C-f>",
-      function()
-        return vim.fn["coc#float#has_scroll"]() == 1 and vim.fn["coc#float#scroll"](1) or "<C-f>"
-      end,
+      function() return vim.fn["coc#float#has_scroll"]() == 1 and vim.fn["coc#float#scroll"](1) or "<C-f>" end,
       mode = "n",
       expr = true,
       silent = true,
@@ -87,9 +85,7 @@ return {
     },
     {
       "<C-b>",
-      function()
-        return vim.fn["coc#float#has_scroll"]() == 1 and vim.fn["coc#float#scroll"](0) or "<C-b>"
-      end,
+      function() return vim.fn["coc#float#has_scroll"]() == 1 and vim.fn["coc#float#scroll"](0) or "<C-b>" end,
       mode = "n",
       expr = true,
       silent = true,
@@ -98,9 +94,7 @@ return {
     },
     {
       "<C-f>",
-      function()
-        return vim.fn["coc#float#has_scroll"]() == 1 and "<C-r>=coc#float#scroll(1)<CR>" or "<Right>"
-      end,
+      function() return vim.fn["coc#float#has_scroll"]() == 1 and "<C-r>=coc#float#scroll(1)<CR>" or "<Right>" end,
       mode = "i",
       expr = true,
       silent = true,
@@ -109,9 +103,7 @@ return {
     },
     {
       "<C-b>",
-      function()
-        return vim.fn["coc#float#has_scroll"]() == 1 and "<C-r>=coc#float#scroll(0)<CR>" or "<Left>"
-      end,
+      function() return vim.fn["coc#float#has_scroll"]() == 1 and "<C-r>=coc#float#scroll(0)<CR>" or "<Left>" end,
       mode = "i",
       expr = true,
       silent = true,
@@ -120,9 +112,7 @@ return {
     },
     {
       "<C-f>",
-      function()
-        return vim.fn["coc#float#has_scroll"]() == 1 and vim.fn["coc#float#scroll"](1) or "<C-f>"
-      end,
+      function() return vim.fn["coc#float#has_scroll"]() == 1 and vim.fn["coc#float#scroll"](1) or "<C-f>" end,
       mode = "v",
       expr = true,
       silent = true,
@@ -131,9 +121,7 @@ return {
     },
     {
       "<C-b>",
-      function()
-        return vim.fn["coc#float#has_scroll"]() == 1 and vim.fn["coc#float#scroll"](0) or "<C-b>"
-      end,
+      function() return vim.fn["coc#float#has_scroll"]() == 1 and vim.fn["coc#float#scroll"](0) or "<C-b>" end,
       mode = "v",
       expr = true,
       silent = true,
