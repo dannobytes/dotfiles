@@ -1,11 +1,11 @@
 -- Configure leader keys as early as possible.
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 
 ---------------------------
 -- LUA configuration setup
 ---------------------------
-require("config.lazy")
+require('config.lazy')
 require('config.options')
 require('config.keymaps')
 require('config.autocmds')
@@ -26,7 +26,7 @@ vim.g.markdown_fenced_languages = {
   'yaml',
 }
 
-vim.cmd [[
+vim.cmd([[
 " Automatic installation for vim-plug
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -107,4 +107,4 @@ if executable('rg')
   " Type `\` to initiate grep search across all files in a quickfix window.
   nnoremap \ :Search<CR>
 endif
-]]
+]])

@@ -1,13 +1,30 @@
 return {
   {
-    "neovim/nvim-lspconfig",
+    'stevearc/conform.nvim',
+    opts = {
+      formatters_by_ft = {
+        scss = { 'oxfmt', 'prettier', stop_after_first = true },
+        sass = { 'oxfmt', 'prettier', stop_after_first = true },
+      },
+    },
+  },
+
+  {
+    'neovim/nvim-lspconfig',
     opts = {
       diagnostics = {
-        float = { border = "rounded" }, -- Add rounded border
+        float = { border = 'rounded' }, -- Add rounded border
         virtual_text = false,
       },
+      inlay_hints = {
+        enabled = false,
+      },
       servers = {
-        ts_ls = { enabled = false }, -- disabled in favor of vtsls
+        oxlint = {
+          settings = {
+            fixKind = 'all',
+          },
+        },
       },
     },
   },
