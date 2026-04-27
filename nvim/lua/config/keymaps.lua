@@ -18,12 +18,7 @@ vim.keymap.set('n', '<leader>vrc', ':edit $MYVIMRC<cr>')
 vim.keymap.set('n', '<leader>vrso', ':source $MYVIMRC<cr>')
 
 -- Shortcuts to work with windows and buffers easier
-vim.keymap.set('n', '<leader>bb', ':b#<cr>')
-vim.keymap.set('n', '<leader>bd', ':ls<cr>:bd ')
-
--- Shortcut command to clear all buffers except the current one.
-vim.api.nvim_create_user_command('BufOnly', 'silent! execute "%bd|e#|bd#"', {})
-vim.cmd.cnoreabbrev('bo', 'BufOnly')
+vim.keymap.set('n', '<leader>bb', ':b#<cr>', { desc = 'Switch to last buffer' })
 
 -- Redirect deprecated :Gbrowse to :GBrowse
 vim.cmd.cnoreabbrev('Gbrowse', 'GBrowse')

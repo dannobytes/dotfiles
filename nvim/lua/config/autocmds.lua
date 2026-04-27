@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- Oxlint fix on save
 -- TODO: this is hacky and removes console logs on save :()
-
+-- vim.api.nvim_create_autocmd('BufWritePre', {
 --   pattern = { '*.ts', '*.tsx', '*.js', '*.jsx' },
 --   callback = function(event)
 --     if vim.fn.exists(':LspOxlintFixAll') > 0 then vim.cmd('LspOxlintFixAll') end

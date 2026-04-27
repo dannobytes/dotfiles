@@ -229,7 +229,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # ==============================
 # Always attach last tmux session. If no session exists, create new one.
 if [[ -z "$TMUX" ]] ;then
-  tmux attach || tmux new
+  # tmux attach || tmux new
 fi
 
 # ==============================

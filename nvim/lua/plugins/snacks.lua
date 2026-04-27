@@ -15,6 +15,27 @@ return {
           height = 0.85,
         },
       },
+      actions = {
+        -- Custom action to add selected files to ClaudeCode running in the
+        -- terminal that's connected to this nvim instance.
+        claude_add = function(picker)
+          local items = picker:selected({ fallback = true })
+          for _, item in ipairs(items) do
+            if item.file then
+              vim.cmd('ClaudeCodeAdd ' .. vim.fn.fnameescape(item.file))
+            end
+          end
+        end,
+      },
+      win = {
+        input = {
+          keys = {
+            ['<leader>a'] = { 'claude_add', mode = { 'n', 'i' } },
+            ['<c-p>'] = { 'history_back', mode = { 'i', 'n' } },
+            ['<c-n>'] = { 'history_forward', mode = { 'i', 'n' } },
+          },
+        },
+      },
       sources = {
         explorer = {
           layout = {
@@ -60,7 +81,7 @@ return {
     -- find
     { '<c-p>', function() Snacks.picker.files() end, desc = 'Find Files' },
     { '<c-t>', function() Snacks.picker.buffers() end, desc = 'Buffers' },
-    { '<leader><c-p>', function() Snacks.picker.recent() end, desc = 'Recent' },
+    { '<leader><c-p>', function() Snacks.picker.recent() end, desc = 'Recent Files' },
 
     -- git
     { '<leader>gB', function() Snacks.picker.git_branches() end, desc = 'Git Branches' },

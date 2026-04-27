@@ -60,3 +60,12 @@ if term and string.find(term, 'tmux') then
 else
   vim.opt.termguicolors = false
 end
+
+-- Suppress LSP server crash prompts (e.g. vtsls)
+local orig_show_message_request = vim.lsp.handlers['window/showMessageRequest']
+vim.lsp.handlers['window/showMessageRequest'] = function(err, result, ctx, config)
+  if result and result.message and result.message:match('crashed') then
+    return vim.NIL
+  end
+  return orig_show_message_request(err, result, ctx, config)
+end
