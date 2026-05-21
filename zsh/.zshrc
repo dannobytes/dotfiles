@@ -228,8 +228,9 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # TMUX config
 # ==============================
 # Always attach last tmux session. If no session exists, create new one.
-if [[ -z "$TMUX" ]] ;then
-  # tmux attach || tmux new
+# Only auto-start in real terminal emulators — skip agent wrappers (Claude Code, Conductor, etc.)
+if [[ -z "$TMUX" && "$TERM_PROGRAM" == (ghostty|Apple_Terminal|iTerm.app) ]]; then
+  tmux attach || tmux new
 fi
 
 # ==============================

@@ -53,6 +53,7 @@ background = #1a1a1f
 confirm-close-surface = false
 cursor-color = plum1
 cursor-opacity = 0.8
+cursor-style = block
 cursor-text = black
 desktop-notifications = true
 font-family = "lilex nerd font"

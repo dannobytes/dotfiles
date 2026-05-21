@@ -32,7 +32,7 @@ vim.opt.listchars = { tab = '»·', trail = '·', nbsp = '·' }
 vim.opt.mouse = 'a' -- Enable mouse support
 vim.opt.number = true
 vim.opt.relativenumber = true -- start with relative line numbers
-vim.opt.scrolloff = 4 -- Lines of context
+vim.opt.scrolloff = 2 -- Lines of context
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.shortmess:append('c') -- CoC: No messages to |ins-completion-menu|.
@@ -69,3 +69,7 @@ vim.lsp.handlers['window/showMessageRequest'] = function(err, result, ctx, confi
   end
   return orig_show_message_request(err, result, ctx, config)
 end
+
+-- Use copilot.lua's native ghost-text suggestions (with auto_trigger,
+-- accept_word, accept_line) instead of routing copilot through blink.cmp.
+vim.g.ai_cmp = false

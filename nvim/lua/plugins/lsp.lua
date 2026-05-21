@@ -24,6 +24,24 @@ return {
         enabled = false,
       },
       servers = {
+        ['*'] = {
+          keys = {
+            {
+              '<leader>ca',
+              function()
+                vim.lsp.buf.code_action({
+                  context = {
+                    diagnostics = vim.lsp.diagnostic.get_line_diagnostics(),
+                    only = { 'quickfix' },
+                  },
+                })
+              end,
+              desc = 'Code Action (quickfix)',
+              mode = { 'n', 'x' },
+              has = 'codeAction',
+            },
+          },
+        },
         oxlint = {
           settings = {
             fixKind = 'all',

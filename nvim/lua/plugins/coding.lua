@@ -1,9 +1,25 @@
 return {
+  -- Disabled in favor of copilot.lua, which is more actively maintained and has
+  -- better support for newer Copilot features.
+  -- {
+  --   'github/copilot.vim',
+  --   enabled = false,
+  --   event = 'InsertEnter',
+  --   cmd = 'Copilot',
+  --   keys = {
+  --     { '<c-l>', '<Plug>(copilot-accept-word)', mode = 'i', desc = 'Accept next Copilot suggestion word' },
+  --   },
+  -- },
+
   {
-    'github/copilot.vim',
-    lazy = false,
-    keys = {
-      { '<c-l>', '<Plug>(copilot-accept-word)', mode = 'i', desc = 'Accept next Copilot suggestion word' },
+    'zbirenbaum/copilot.lua',
+    opts = {
+      suggestion = {
+        keymap = {
+          accept_word = '<C-l>',
+          accept_line = '<C-j>',
+        },
+      },
     },
   },
 
@@ -18,11 +34,6 @@ return {
       },
     },
     keys = {
-      -- { "<leader>a",  nil,                              desc = "AI/Claude Code" },
-      -- { "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
-      -- { "<leader>af", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
-      -- { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
-      -- { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
       { '<leader>am', '<cmd>ClaudeCodeSelectModel<cr>', desc = 'Select Claude model' },
       { '<leader>ab', '<cmd>ClaudeCodeAdd %<cr>', desc = 'Add current buffer' },
       { '<leader>as', '<cmd>ClaudeCodeSend<cr>', desc = 'Send to Claude', mode = 'v' },
