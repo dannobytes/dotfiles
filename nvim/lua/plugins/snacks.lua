@@ -1,5 +1,27 @@
+local function patch_snacks_dim()
+  -- Workaround for snacks.nvim picker layout passing non-integer height/width
+  -- to nvim_win_set_config in narrow windows (e.g. code action picker).
+  local ok, Win = pcall(require, 'snacks.win')
+  if not ok then
+    return
+  end
+  local orig_dim = Win.dim
+  function Win:dim(parent)
+    local r = orig_dim(self, parent)
+    r.height = math.floor(r.height)
+    r.width = math.floor(r.width)
+    r.row = math.floor(r.row)
+    r.col = math.floor(r.col)
+    return r
+  end
+end
+
 return {
   'folke/snacks.nvim',
+  config = function(_, opts)
+    require('snacks').setup(opts)
+    patch_snacks_dim()
+  end,
   ---@type snacks.Config
   opts = {
     ---@class snacks.explorer.Config
