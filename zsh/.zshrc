@@ -69,8 +69,6 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -99,11 +97,13 @@ fi
 
 
 
-# -------------------------------------------------------------------
+# ===================================================================
+# ===================================================================
 # ===================================================================
 # MY CUSTOM CONFIG BELOW
 # ===================================================================
-# -------------------------------------------------------------------
+# ===================================================================
+# ===================================================================
 
 # Ghostty shell integration for Bash. This should be at the top of your bashrc!
 if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
