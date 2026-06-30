@@ -47,6 +47,16 @@ return {
             fixKind = 'all',
           },
         },
+        tsgo = {
+          settings = {
+            typescript = {
+              preferences = {
+                importModuleSpecifier = 'non-relative',
+                includePackageJsonAutoImports = 'on',
+              },
+            },
+          },
+        },
       },
     },
   },
