@@ -1,10 +1,7 @@
 return {
   {
-    'nvim-treesitter/nvim-treesitter',
-    opts = { ensure_installed = { 'graphql', 'proto' } },
-  },
-  {
     'neovim/nvim-lspconfig',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
     opts = {
       servers = {
         graphql = {},

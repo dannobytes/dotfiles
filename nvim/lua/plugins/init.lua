@@ -32,9 +32,7 @@ return {
     config = function()
       -- :GBrowse delegates URL opening to a :Browse command; define it so
       -- fugitive doesn't fall back to netrw#BrowseX (errors with E118)
-      vim.api.nvim_create_user_command('Browse', function(opts)
-        vim.fn.system({ 'open', opts.args })
-      end, { nargs = 1 })
+      vim.api.nvim_create_user_command('Browse', function(opts) vim.fn.system({ 'open', opts.args }) end, { nargs = 1 })
     end,
   },
   { 'tpope/vim-rhubarb' }, -- Enables :GBrowse
