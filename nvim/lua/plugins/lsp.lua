@@ -51,7 +51,7 @@ return {
           settings = {
             typescript = {
               preferences = {
-                importModuleSpecifier = 'non-relative',
+                importModuleSpecifier = 'shortest',
                 includePackageJsonAutoImports = 'on',
               },
             },
