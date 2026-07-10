@@ -51,8 +51,26 @@ return {
           settings = {
             typescript = {
               preferences = {
+                ---@type 'shortest'|'relative'|'non-relative'|'project-relative'
                 importModuleSpecifier = 'shortest',
+                ---@type 'auto'|'on'|'off'
                 includePackageJsonAutoImports = 'on',
+                -- Auto-import types as `import type { X }` instead of a value
+                -- import. Pairs well with verbatimModuleSyntax / isolatedModules.
+                preferTypeOnlyAutoImports = true,
+                -- Extension on generated import paths. Set 'js' for
+                -- NodeNext/ESM projects that require explicit .js extensions.
+                ---@type 'auto'|'minimal'|'index'|'js'
+                importModuleSpecifierEnding = 'auto',
+                -- Steer auto-imports away from the wrong module, e.g. force
+                -- 'lodash-es' over 'lodash', or hide barrel/internal paths.
+                autoImportFileExcludePatterns = {},
+              },
+              updateImportsOnFileMove = {
+                -- Rewrite imports when a file is moved/renamed. Depends on
+                -- client-side file-operation support; verify it actually fires.
+                ---@type 'always'|'prompt'|'never'
+                enabled = 'always',
               },
             },
           },
