@@ -5,7 +5,8 @@ return {
     opts = {
       servers = {
         graphql = {},
-        protols = {},
+        -- buf's built-in LSP for Protobuf (`buf lsp serve`).
+        buf_ls = {},
       },
     },
   },

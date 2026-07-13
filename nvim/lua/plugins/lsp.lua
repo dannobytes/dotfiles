@@ -3,10 +3,10 @@ return {
     'stevearc/conform.nvim',
     opts = {
       formatters_by_ft = {
-        javascript = { 'biome-check', 'prettier', 'oxfmt', stop_after_first = true },
-        typescript = { 'biome-check', 'prettier', 'oxfmt', stop_after_first = true },
-        javascriptreact = { 'biome-check', 'prettier', 'oxfmt', stop_after_first = true },
-        typescriptreact = { 'biome-check', 'prettier', 'oxfmt', stop_after_first = true },
+        javascript = { 'prettier', 'oxfmt', stop_after_first = true },
+        typescript = { 'prettier', 'oxfmt', stop_after_first = true },
+        javascriptreact = { 'prettier', 'oxfmt', stop_after_first = true },
+        typescriptreact = { 'prettier', 'oxfmt', stop_after_first = true },
         scss = { 'prettier', 'oxfmt', stop_after_first = true },
         sass = { 'prettier', 'oxfmt', stop_after_first = true },
       },

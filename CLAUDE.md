@@ -14,6 +14,7 @@ Active configs live in `bash/`, `bat/`, `cron/`, `ghostty/`, `git/`, `gmail/`, `
 - **Lua (Neovim)** is formatted by **stylua** (`nvim/stylua.toml`): single quotes, 2-space indent, column width 120, `collapse_simple_statement = "FunctionOnly"`. Run `stylua nvim/` after editing Lua.
 - **Commits are GPG-signed** (`git/.gitconfig` sets `commit.gpgSign = true`). Don't bypass signing.
 - **`.gitignore`** ignores `.claude` only — nothing else is auto-excluded.
+- **Keep configs company-agnostic.** Never reference a current/past employer, their repos, monorepos, internal app or service names, or proprietary tooling in config files or comments. When a tooling choice is motivated by a work project, describe the technical reason (e.g. "match a pnpm + prettier monorepo") without naming the company.
 
 ## Path wart to watch for
 

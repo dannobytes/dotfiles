@@ -73,3 +73,9 @@ end
 -- Use copilot.lua's native ghost-text suggestions (with auto_trigger,
 -- accept_word, accept_line) instead of routing copilot through blink.cmp.
 vim.g.ai_cmp = false
+
+-- Use Astral's `ty` as the Python type-checker LSP instead of pyright. The
+-- LazyVim python extra reads this at load time and force-enables ty + ruff
+-- while disabling pyright/basedpyright. Must be set before plugins load
+-- (options.lua is).
+vim.g.lazyvim_python_lsp = 'ty'
