@@ -47,6 +47,12 @@ return {
             fixKind = 'all',
           },
         },
+        -- Prose linting via Vale's official language server (wraps the `vale`
+        -- CLI). Only activates when a `.vale.ini` exists at the project root.
+        -- `mdx` is added to the default filetypes so MDX prose is covered too.
+        vale_ls = {
+          filetypes = { 'asciidoc', 'markdown', 'mdx', 'text', 'tex', 'rst', 'html', 'xml' },
+        },
         tsgo = {
           settings = {
             typescript = {
