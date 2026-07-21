@@ -49,6 +49,10 @@ local function custom_highlights()
   vim.api.nvim_set_hl(0, 'CocNotificationProgress', { fg = '#ff8700' }) -- ctermfg 208
   vim.api.nvim_set_hl(0, 'CocHighlightText', { bg = '#5f5f00' }) -- ctermbg 58
 
+  -- Brighten Monokai's default comment color (#75715E) for readability;
+  -- @comment links to Comment by default, so this covers treesitter too
+  vim.api.nvim_set_hl(0, 'Comment', { fg = '#98937a', italic = false }) -- ctermfg 246
+
   vim.api.nvim_set_hl(0, 'Visual', { bg = '#18748a', fg = '#eeeeee' }) -- ctermbg 54, ctermfg 7
   vim.api.nvim_set_hl(0, 'Search', { bg = '#d7afdd', fg = '#000000' }) -- ctermbg 183
   vim.api.nvim_set_hl(0, 'netrwMarkFile', { link = 'Search' })

@@ -10,7 +10,6 @@ vim.opt.autoread = true -- display file changes immediately
 vim.opt.autowrite = true
 vim.opt.autowriteall = true
 vim.opt.backspace = { 'indent', 'eol', 'start' } -- allow backspacing over everything
-vim.opt.backup = false -- CoC: Some LSPs have issues with backups.
 vim.opt.clipboard = 'unnamed'
 vim.opt.colorcolumn = '80'
 vim.opt.conceallevel = 0
@@ -32,7 +31,7 @@ vim.opt.listchars = { tab = '»·', trail = '·', nbsp = '·' }
 vim.opt.mouse = 'a' -- Enable mouse support
 vim.opt.number = true
 vim.opt.relativenumber = true -- start with relative line numbers
-vim.opt.scrolloff = 2 -- Lines of context
+vim.opt.scrolloff = 3 -- Lines of context
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.shortmess:append('c') -- CoC: No messages to |ins-completion-menu|.

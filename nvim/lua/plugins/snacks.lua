@@ -83,6 +83,7 @@ return {
               'Struct',
               'Trait',
               'Variable', -- New value not included in default filter.
+              'Constant', -- New value not included in default filter.
             },
           },
         },
