@@ -1,16 +1,37 @@
 return {
   {
     'stevearc/conform.nvim',
-    opts = {
-      formatters_by_ft = {
-        javascript = { 'prettier', 'oxfmt', stop_after_first = true },
-        typescript = { 'prettier', 'oxfmt', stop_after_first = true },
-        javascriptreact = { 'prettier', 'oxfmt', stop_after_first = true },
-        typescriptreact = { 'prettier', 'oxfmt', stop_after_first = true },
-        scss = { 'prettier', 'oxfmt', stop_after_first = true },
-        sass = { 'prettier', 'oxfmt', stop_after_first = true },
-      },
-    },
+    opts = function(_, opts)
+      -- A file's package has migrated its FORMATTING to oxfmt iff that package
+      -- owns an oxfmt.config.ts. Search upward from the file and take the
+      -- nearest match, but exclude the repo-root oxfmt.config.ts: it exists
+      -- repo-wide, so counting it would make every file look migrated. Only a
+      -- package-local config counts. Mirrors the monorepo's own marker +
+      -- lint-staged `pnpm -F <pkg> fix` routing.
+      local function in_oxfmt_pkg(_, ctx)
+        local root = vim.fs.root(ctx.filename, '.git') or vim.fs.dirname(ctx.filename)
+        local found = vim.fs.find('oxfmt.config.ts', {
+          path = ctx.dirname,
+          upward = true,
+          stop = vim.fs.dirname(root),
+        })[1]
+        return found ~= nil and vim.fs.dirname(found) ~= root
+      end
+
+      opts.formatters = opts.formatters or {}
+      opts.formatters.oxfmt = { condition = in_oxfmt_pkg }
+      opts.formatters.prettier = {
+        condition = function(_, ctx) return not in_oxfmt_pkg(_, ctx) end,
+      }
+
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
+      for _, ft in ipairs({ 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' }) do
+        opts.formatters_by_ft[ft] = { 'oxfmt', 'prettier', stop_after_first = true }
+      end
+      -- oxfmt formats JS/TS(/JSON) only, not CSS-family — keep these on prettier.
+      opts.formatters_by_ft.scss = { 'prettier' }
+      opts.formatters_by_ft.sass = { 'prettier' }
+    end,
   },
 
   {
