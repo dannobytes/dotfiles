@@ -13,14 +13,28 @@ return {
 
   {
     'zbirenbaum/copilot.lua',
-    opts = {
-      suggestion = {
+    opts = function(_, opts)
+      opts.suggestion = vim.tbl_deep_extend('force', opts.suggestion or {}, {
         keymap = {
           accept_word = '<C-l>',
           accept_line = '<C-j>',
         },
-      },
-    },
+      })
+
+      -- Disable Copilot inside the Lattice monorepo. Gate per-buffer (not at
+      -- startup) so Copilot keeps working in other repos opened in the same
+      -- session. A path-prefix match also covers in-repo worktrees
+      -- (`.worktrees/`, `.conductor/`) since those live under the repo root.
+      local lattice = vim.fs.normalize('~/Developer/lattice')
+      opts.should_attach = function(bufnr, bufname)
+        -- Preserve Copilot's default gating: listed, normal buffers only.
+        if not vim.bo[bufnr].buflisted or vim.bo[bufnr].buftype ~= '' then
+          return false
+        end
+        local path = vim.fs.normalize(bufname)
+        return not (path == lattice or vim.startswith(path, lattice .. '/'))
+      end
+    end,
   },
 
   {
