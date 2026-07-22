@@ -39,7 +39,7 @@ return {
     opts = {
       diagnostics = {
         float = { border = 'rounded' }, -- Add rounded border
-        virtual_text = false,
+        virtual_text = true,
       },
       inlay_hints = {
         enabled = false,
